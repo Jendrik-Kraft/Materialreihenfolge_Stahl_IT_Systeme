@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'REIHENFOLGE.apps.ReihenfolgeConfig',
+    'REIHENFOLGE_APP.apps.ReihenfolgeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
