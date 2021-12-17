@@ -1,6 +1,4 @@
 import pandas as pd
-
-
 def get_coils_from_database():
     """
     This function is used to get the databse
