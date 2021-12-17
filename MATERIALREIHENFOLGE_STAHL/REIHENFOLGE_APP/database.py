@@ -5,6 +5,5 @@ def get_coils_from_database():
     :return: List of two panda dataframes, one for coils and one for dummy coils
     """
     dummy_coils=pd.read_excel("./default_database_dummy_coils.xlsx")
-    print(dummy_coils.head())
     coils=pd.read_excel("./default_database1.xlsx")
     return [coils, dummy_coils]
