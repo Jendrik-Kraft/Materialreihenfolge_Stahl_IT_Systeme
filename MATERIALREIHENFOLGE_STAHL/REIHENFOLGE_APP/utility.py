@@ -1,5 +1,3 @@
-from database import *
-
 def find_fusible_coils(coils, tolerance_h_per, tolerance_w_abs):
     """
     This functions finds each coil pair from coils if both, height and width, are in given tolerance
@@ -35,6 +33,5 @@ def find_fusible_coils(coils, tolerance_h_per, tolerance_w_abs):
     for elem in fusible_coils_temp:
         if elem not in fusible_coils:
             fusible_coils.append(elem)
-    print(fusible_coils)
 
     return fusible_coils
