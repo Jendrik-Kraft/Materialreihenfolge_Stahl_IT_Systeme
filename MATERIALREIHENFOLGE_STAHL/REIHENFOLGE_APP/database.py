@@ -4,6 +4,3 @@ def get_coils_from_database():
     print(dummy_coils.head())
     coils=pd.read_excel("./default_database1.xlsx")
     #print(coils["Hight"][5])
-
-
-get_coils_from_database()
