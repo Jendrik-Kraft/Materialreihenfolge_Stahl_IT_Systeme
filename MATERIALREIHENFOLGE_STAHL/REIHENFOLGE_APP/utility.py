@@ -9,8 +9,8 @@ def find_fusible_coils(coils, tolerance_h_per, tolerance_w_abs):
     # TODO Clarification needed: What happens if coil1*(1+tolerance) does not include coil2, but coil2*(1-tolerance)
     #  does include coil1? (e.g. 10%, coil1=100 coil2=111 100+10%=110, 111-10%=99.9)
     # Calculate top and bottom tolerance for height given in percent
-    tolerance_h_top = 1+tolerance_h_per*0.1
-    tolerance_h_bottom = 1-tolerance_h_per*0.1
+    tolerance_h_top = 1+tolerance_h_per/100
+    tolerance_h_bottom = 1-tolerance_h_per/100
     fusible_coils_temp = []
     coils_list = coils.values.tolist()
     for coil in coils_list:
