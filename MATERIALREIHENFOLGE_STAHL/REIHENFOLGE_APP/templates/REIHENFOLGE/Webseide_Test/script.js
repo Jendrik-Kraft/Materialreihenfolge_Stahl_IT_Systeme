@@ -14,5 +14,5 @@ function updateToleranz() {
   localStorage.setItem("Breite", tol_breite);
   localStorage.setItem("Dicke", tol_dicke);
   location.href =
-    "http://127.0.0.1:5500/display_graph/" + tol_breite + "/" + tol_dicke;
+    "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
 }
