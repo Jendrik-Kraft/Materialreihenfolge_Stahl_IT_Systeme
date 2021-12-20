@@ -154,6 +154,7 @@
         { x: 5, y: 800 },
         { x: 1, y: 950 },
         { x: 2, y: 1000 },
+        { x: 2, y: 1000 },
         { x: 2, y: 200 },
         { x: 5, y: 150 },
         { x: 3, y: 700 },
@@ -191,6 +192,16 @@
           plugins: {
             legend: false,
           },
+          tooltips: {
+            //https://github.com/chartjs/Chart.js/issues/1889
+            filter: function (tooltipItem) {
+              return tooltipItem.datasetIndex === 0;
+            },
+          },
+          interaction: {
+            mode: "index",
+          },
+          //events: [], //um alle Interaktionen mit der Chart zu deaktivieren
           scales: {
             x: {
               ticks: { min: 40, max: 160 },
