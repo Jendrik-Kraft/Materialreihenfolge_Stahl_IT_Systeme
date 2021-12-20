@@ -108,11 +108,63 @@
     </section>
 
     <script>
+      var beispiel = [
+        { x: 3, y: 950 },
+        { x: 5, y: 250 },
+        { x: 2, y: 750 },
+        { x: 4, y: 250 },
+        { x: 4, y: 150 },
+        { x: 2, y: 650 },
+        { x: 3, y: 500 },
+        { x: 1, y: 500 },
+        { x: 1, y: 700 },
+        { x: 3, y: 800 },
+        { x: 4, y: 400 },
+        { x: 5, y: 700 },
+        { x: 1, y: 450 },
+        { x: 3, y: 850 },
+        { x: 3, y: 850 },
+        { x: 1, y: 300 },
+        { x: 2, y: 650 },
+        { x: 1, y: 600 },
+        { x: 4, y: 550 },
+        { x: 2, y: 900 },
+        { x: 3, y: 300 },
+        { x: 1, y: 350 },
+        { x: 4, y: 150 },
+        { x: 2, y: 950 },
+        { x: 4, y: 650 },
+        { x: 4, y: 500 },
+        { x: 4, y: 650 },
+        { x: 3, y: 550 },
+        { x: 1, y: 650 },
+        { x: 2, y: 550 },
+        { x: 5, y: 750 },
+        { x: 1, y: 550 },
+        { x: 5, y: 1000 },
+        { x: 3, y: 250 },
+        { x: 5, y: 150 },
+        { x: 1, y: 150 },
+        { x: 3, y: 100 },
+        { x: 1, y: 450 },
+        { x: 5, y: 450 },
+        { x: 1, y: 400 },
+        { x: 4, y: 800 },
+        { x: 5, y: 650 },
+        { x: 5, y: 800 },
+        { x: 1, y: 950 },
+        { x: 2, y: 1000 },
+        { x: 2, y: 1000 },
+        { x: 2, y: 200 },
+        { x: 5, y: 150 },
+        { x: 3, y: 700 },
+        { x: 5, y: 100 },
+        { x: 1, y: 550 },
+      ];
       var xAchse_Name = "Dicke";
       var yAchse_Name = "Breite";
-      //var coils = {{ coils|safe }} // Laden aus der Python Datei
-      //var dummy = {{ dummy|safe }} // Laden aus der Python Datei
-      //var connections = {{ connections|safe }} // Laden aus der Python Datei
+      // var coils = {{coils|safe}} // Laden aus der Python Datei
+      // var connections = {{connections|safe}} // Laden aus der Python Datei
       new Chart("myChart", {
         data: {
           datasets: [
@@ -120,20 +172,21 @@
               type: "scatter",
               pointRadius: 4,
               pointBackgroundColor: "rgb(0,0,255)",
-              data: coils,
-            },
-            {
-              type: "scatter",
-              pointRadius: 4,
-              pointBackgroundColor: "rgb(255,0,0)",
-              data: dummy,
+              data: beispiel,
             },
             {
               type: "line",
               backgroundColor: "rgba(0,0,0,1.0)",
               borderColor: "rgba(0,0,0,1)",
-              data: connections,
+              data: beispiel,
+              pointHitRadius: 0,
             },
+            /* {
+                    type: "line",
+                    backgroundColor: "rgba(255,0,0,1.0)",S
+                    borderColor: "rgba(255,0,0,1)",
+                    data: ypunkt1_2,
+                  }, */
           ],
         },
         options: {
