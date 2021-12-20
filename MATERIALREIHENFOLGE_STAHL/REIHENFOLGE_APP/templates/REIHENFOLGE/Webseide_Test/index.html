@@ -13,6 +13,7 @@
       defer
       src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
     ></script>
+    <script defer src="script.js"></script>
   </head>
   <body>
     <!-- hero: https://bulma.io/documentation/layout/hero/ -->
@@ -34,14 +35,14 @@
           <!-- columns: https://bulma.io/documentation/columns/basics/ -->
           <div class="columns">
             <div class="column">
-              <p class="is-size-4 has-text-centered">Toleranz Dicke</p>
+              <p class="is-size-4 has-text-centered">Toleranz Dicke [%]</p>
               <div id="myDIV" class="header">
                 <div class="control has-icons-left">
                   <input
                     class="input is-medium"
                     type="text"
-                    id="myInput"
-                    placeholder="Eingabe der Toleranzdicke in mm"
+                    id="input_dicke"
+                    placeholder="Eingabe der Toleranzdicke in Prozent [%]"
                   />
                   <span class="icon is-left">
                     <i class="fas fa-clipboard"></i>
@@ -52,14 +53,25 @@
           </div>
           <div class="columns">
             <div class="column">
-              <p class="is-size-4 has-text-centered">Toleranz Breite</p>
+              <p class="is-size-5 has-text-centered">
+                Aktuelle Toleranz Dicke:
+                <script>
+                  document.write(localStorage.getItem("Dicke"));
+                </script>
+                %
+              </p>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <p class="is-size-4 has-text-centered">Toleranz Breite [%]</p>
               <div id="myDIV" class="header">
                 <div class="control has-icons-left">
                   <input
                     class="input is-medium"
                     type="text"
-                    id="myInput"
-                    placeholder="Eingabe der Toleranzbreite in mm"
+                    id="input_breite"
+                    placeholder="Eingabe der Toleranzbreite in Prozent [%]"
                   />
                   <span class="icon is-left">
                     <i class="fas fa-clipboard"></i>
@@ -70,7 +82,22 @@
           </div>
           <div class="columns">
             <div class="column">
-              <button class="button addBtn" id="add_task_Btn" onclick="">
+              <p class="is-size-5 has-text-centered">
+                Aktuelle Toleranz Breite:
+                <script>
+                  document.write(localStorage.getItem("Breite"));
+                </script>
+                %
+              </p>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <button
+                class="button addBtn"
+                id="update_tol_Btn"
+                onclick="updateToleranz()"
+              >
                 <!--onclick = Funktion ausführen-->
                 Neue Toleranzen anwenden &nbsp <i class="fas fa-check"></i>
               </button>
@@ -135,7 +162,8 @@
       ];
       var xAchse_Name = "Dicke";
       var yAchse_Name = "Breite";
-
+      // var coils = {{coils|safe}} // Laden aus der Python Datei
+      // var connections = {{connections|safe}} // Laden aus der Python Datei
       new Chart("myChart", {
         data: {
           datasets: [
@@ -145,12 +173,12 @@
               pointBackgroundColor: "rgb(0,0,255)",
               data: beispiel,
             },
-            /*{
+            {
               type: "line",
               backgroundColor: "rgba(0,0,0,1.0)",
               borderColor: "rgba(0,0,0,1)",
               data: beispiel,
-            },*/
+            },
             /* {
                     type: "line",
                     backgroundColor: "rgba(255,0,0,1.0)",S
