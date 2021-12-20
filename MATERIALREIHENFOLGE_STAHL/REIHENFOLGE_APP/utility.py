@@ -1,3 +1,6 @@
+import json
+
+
 def find_fusible_coils(coils, tolerance_h_per, tolerance_w_abs):
     """
     This functions finds each coil pair from coils if both, height and width, are in given tolerance
@@ -35,3 +38,34 @@ def find_fusible_coils(coils, tolerance_h_per, tolerance_w_abs):
             fusible_coils.append(elem)
 
     return fusible_coils
+
+
+def build_coil_list_for_js(coils):
+    """
+    This function converts the coils to the right format for javascript code
+    :param coils: Panda data frame of all coils that should be shown
+    :return: The same data but in the right format
+    """
+    coils_list = coils.values.tolist()
+    list_for_js = []
+    for coil in coils_list:
+        list_for_js.append({"x": coil[1], "y": coil[2]})
+    list_for_js = json.dumps(list_for_js)
+    return list_for_js
+
+
+def build_fitting_coils_list_for_js(coils, fitting_coils):
+    """
+    This function converts the found pairs that need to be connected to the right format for javascript code
+    :param coils: Panda data frame of all coils that will be shown
+    :param fitting_coils: List of coils that need to be connected in the graph
+    :return: A list of the coordinated that need to be connected in the right format for javascript code
+    """
+    coils_list = coils.values.tolist()
+    fitting_coils_for_js = []
+    for pair in fitting_coils:
+        fitting_coils_for_js.append({"x": coils_list[pair[0] - 1][1], "y": coils_list[pair[0] - 1][2]})
+        fitting_coils_for_js.append({"x": coils_list[pair[1] - 1][1], "y": coils_list[pair[1] - 1][2]})
+        fitting_coils_for_js.append({"x": None, "y": None})
+    fitting_coils_for_js = json.dumps(fitting_coils_for_js)
+    return fitting_coils_for_js
