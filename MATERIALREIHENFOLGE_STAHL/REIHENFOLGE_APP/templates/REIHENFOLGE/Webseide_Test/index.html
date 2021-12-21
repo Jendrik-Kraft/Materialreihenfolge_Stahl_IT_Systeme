@@ -110,9 +110,9 @@
     <script>
       var xAchse_Name = "Dicke";
       var yAchse_Name = "Breite";
-      var coils = {{ coils|safe }} ;// Laden aus der Python Datei
+      var coils_out = {{ coils,|safe };} ;// Laden aus der Python Datei
       //var dummy = {{ dummy|safe }} // Laden aus der Python Datei
-      var connections = {{ connections|safe }} ;// Laden aus der Python Datei
+      var connections_out = {{ connections|safe }} ;// Laden aus der Python Datei
       new Chart("myChart", {
         data: {
           datasets: [
@@ -120,7 +120,7 @@
               type: "scatter",
               pointRadius: 4,
               pointBackgroundColor: "rgb(0,0,255)",
-              data: coils,
+              data: coils_out,
             },
             /*{
               type: "scatter",
@@ -132,7 +132,7 @@
               type: "line",
               backgroundColor: "rgba(0,0,0,1.0)",
               borderColor: "rgba(0,0,0,1)",
-              data: connections,
+              data: connections_out,
             },
           ],
         },
