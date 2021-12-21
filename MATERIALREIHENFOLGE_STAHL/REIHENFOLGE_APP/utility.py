@@ -1,4 +1,6 @@
 import json
+
+
 def find_fusible_coils(coils, tolerance_h_per, tolerance_w_abs):
     """
     This functions finds each coil pair from coils if both, height and width, are in given tolerance
