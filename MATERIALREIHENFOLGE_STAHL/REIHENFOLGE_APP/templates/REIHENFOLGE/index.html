@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webside Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'script.js' %}"></script>
+  </head>
+  <body>
+    <!-- hero: https://bulma.io/documentation/layout/hero/ -->
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <h1 class="title">Materialreihenfolge</h1>
+        <p class="subtitle">
+          Ihr Materialreihenfolge System powered by <strong>Team Ford</strong>!
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="columns">
+        <div class="column is-three-quarters">
+          <canvas id="myChart"></canvas>
+        </div>
+        <div class="container notification is-info">
+          <!-- columns: https://bulma.io/documentation/columns/basics/ -->
+          <div class="columns">
+            <div class="column">
+              <p class="is-size-4 has-text-centered">Toleranz Dicke [%]</p>
+              <div id="myDIV" class="header">
+                <div class="control has-icons-left">
+                  <input
+                    class="input is-medium"
+                    type="text"
+                    id="input_dicke"
+                    placeholder="Eingabe der Toleranzdicke in Prozent [%]"
+                  />
+                  <span class="icon is-left">
+                    <i class="fas fa-clipboard"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <p class="is-size-5 has-text-centered">
+                Aktuelle Toleranz Dicke:
+                <script>
+                  document.write(localStorage.getItem("Dicke"));
+                </script>
+                %
+              </p>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <p class="is-size-4 has-text-centered">Toleranz Breite [%]</p>
+              <div id="myDIV" class="header">
+                <div class="control has-icons-left">
+                  <input
+                    class="input is-medium"
+                    type="text"
+                    id="input_breite"
+                    placeholder="Eingabe der Toleranzbreite in Prozent [%]"
+                  />
+                  <span class="icon is-left">
+                    <i class="fas fa-clipboard"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <p class="is-size-5 has-text-centered">
+                Aktuelle Toleranz Breite:
+                <script>
+                  document.write(localStorage.getItem("Breite"));
+                </script>
+                %
+              </p>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <button
+                class="button addBtn"
+                id="update_tol_Btn"
+                onclick="updateToleranz()"
+              >
+                <!--onclick = Funktion ausführen-->
+                Neue Toleranzen anwenden &nbsp <i class="fas fa-check"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      var xAchse_Name = "Dicke";
+      var yAchse_Name = "Breite";
+      var coils = {{ coils|safe }} ;// Laden aus der Python Datei
+      //var dummy = {{ dummy_coils|safe }} // Laden aus der Python Datei
+      var connections = {{ connections|safe }} ;// Laden aus der Python Datei
+      new Chart("myChart", {
+        data: {
+          datasets: [
+            {
+              type: "scatter",
+              pointRadius: 4,
+              pointBackgroundColor: "rgb(0,0,255)",
+              data: coils,
+            },
+            /*{
+              type: "scatter",
+              pointRadius: 4,
+              pointBackgroundColor: "rgb(255,0,0)",
+              data: dummy,
+            },*/
+            {
+              type: "line",
+              backgroundColor: "rgba(0,0,0,1.0)",
+              borderColor: "rgba(0,0,0,1)",
+              data: connections,
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            legend: false,
+            tooltip: {
+              enabled: true,
+              filter: function (tooltipItem) {
+                return tooltipItem.datasetIndex === 0;
+              },
+            },
+          },
+          interaction: {
+            mode: "index",
+          },
+          //events: [], //um alle Interaktionen mit der Chart zu deaktivieren
+          scales: {
+            x: {
+              ticks: { min: 40, max: 160 },
+              title: {
+                display: true,
+                text: xAchse_Name,
+              },
+            },
+            y: {
+              ticks: { min: 6, max: 16 },
+              title: {
+                display: true,
+                text: yAchse_Name,
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
