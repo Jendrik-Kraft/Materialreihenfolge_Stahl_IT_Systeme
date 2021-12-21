@@ -5,6 +5,9 @@ if (!firstTime) {
   localStorage.setItem("first_time", "1");
   localStorage.setItem("Breite", "10");
   localStorage.setItem("Dicke", "10");
+} else {
+  location.href =
+    "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
 }
 
 // Get Toleranzes and Store in LocalStorage
