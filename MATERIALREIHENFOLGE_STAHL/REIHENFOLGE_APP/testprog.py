@@ -63,6 +63,8 @@ def generate_path(coils, dummy_coils, tolerance_h_per, tolerance_w_abs):
     :param tolerance_w_abs:
     :return:
     """
+    # ToDo: Raise Error when it's not possible to create a fusible path with one of the algorithms
+
     # Path Option 1:
     #   - Sort coil list based on hight + width
     coils_path1 = coils.sort_values(by=['Hight','Width'], ignore_index=True)
@@ -88,6 +90,8 @@ def get_complete_coil_list(coils, dummy_coils, tolerance_h_per, tolerance_w_abs)
     :param tolerance_w_abs:
     :return:
     """
+    # ToDo: Raise Error when it's not possible to create a fusible coil-list
+
     # Add additional rows to coils pandas dataframe
     # tolerance_h, h_min, h_max
     coils['tolerance_h'] = tolerance_h_per/100*coils.Hight
@@ -112,8 +116,6 @@ def get_complete_coil_list(coils, dummy_coils, tolerance_h_per, tolerance_w_abs)
 
     complete_coils = coils.iloc[[0]]
     for n in range(len(coils)-1):
-        #print(f'Coil-Nummer {n}:')
-        #print(coils.iloc[[n]])
         # Nächstes coil liegt im Toleranzbereich:
         if (coils.tolerance_h_top[n] >= coils.Hight[n+1] >= coils.tolerance_h_bottom[n]) and (
                 coils.tolerance_w_top[n] >= coils.Width[n+1] >= coils.tolerance_w_bottom[n]):
@@ -135,6 +137,7 @@ def get_dummy_coils(coil1, coil2, dummy_coils):
     :param dummy_coils:
     :return:
     """
+    # ToDo: Raise Error when it's not possible to fuse 2 coils with given dummy-coils
     dummy_coils_rslt = dummy_coils
     # Check hight:
     # Hight von coil2 im Toleranzbereich von coil1
@@ -159,7 +162,6 @@ def get_dummy_coils(coil1, coil2, dummy_coils):
         dummy_coils_rslt = dummy_coils_rslt[(dummy_coils_rslt['tolerance_w_top'] >= coil2.Width.iloc[0]) & (coil2.Width.iloc[0] >= dummy_coils_rslt['tolerance_w_bottom'])]
     # Width von coil2 außerhalb Toleranzbereich von coil1
     else:
-        #print('Width von coil2 außerhalb Toleranzbereich von coil1')
         if coil1.Width.iloc[0] > coil2.Width.iloc[0]:
             dummy_coils_rslt = dummy_coils_rslt[dummy_coils_rslt['Width'] >= coil1.tolerance_w_bottom.iloc[0]]
             # Sortieren und somit dummy_coil auswählen was am nähsten an Toleranzgrenze liegt
