@@ -69,3 +69,5 @@ def build_fitting_coils_list_for_js(coils, fitting_coils):
         fitting_coils_for_js.append({"x": None, "y": None})
     fitting_coils_for_js = json.dumps(fitting_coils_for_js)
     return fitting_coils_for_js
+
+
