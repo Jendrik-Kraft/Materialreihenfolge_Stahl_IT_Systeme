@@ -141,10 +141,22 @@
           plugins: {
             legend: false,
             tooltip: {
-              enabled: true,
-              filter: function (tooltipItem) {
-                return tooltipItem.datasetIndex === 0;
+              callbacks: {
+                title: function(tooltipItem) {
+                    title = 'Dicke: ' + tooltipItem[0].parsed.x;
+                    return title;
+                },
+                label: function(context) {
+                    let label = context.dataset.label || '';
+
+                    if (label) {
+                        label += ': ';
+                    }
+                    label = 'Breite: ' + context.parsed.y;
+                    return label;
+                },
               },
+              displayColors: false,
             },
           },
           interaction: {
