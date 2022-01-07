@@ -19,3 +19,11 @@ function updateToleranz() {
   location.href =
     "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
 }
+function showPath() {
+  var tol_dicke = document.getElementById("input_dicke").value;
+  var tol_breite = document.getElementById("input_breite").value;
+  localStorage.setItem("Breite", tol_breite);
+  localStorage.setItem("Dicke", tol_dicke);
+  location.href =
+    "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke + "/quickpath";
+}
