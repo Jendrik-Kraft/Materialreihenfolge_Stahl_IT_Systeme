@@ -26,11 +26,11 @@ function showPath() {
   var path; 
   var tolBreite = localStorage.getItem("Breite");
   var tolDicke = localStorage.getItem("Dicke");
-  location.href = 
-      "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/test";
+  //location.href = 
+      //"http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/test";
   
   // Change Button Text
-  /*if(currentText == "Zeige besten Pfad"){
+  if(currentText == "Zeige besten Pfad"){
     path = "/bestpath";
     newText = "Zeige alle Pfade";
     document.getElementById("show_path").innerHTML = newText;
@@ -41,7 +41,7 @@ function showPath() {
     document.getElementById("show_path").innerHTML = newText;
   }
   location.href = 
-      "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke + path;*/
+      "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + path;
 }
 
 function onChangeAxisButtonClick() {
