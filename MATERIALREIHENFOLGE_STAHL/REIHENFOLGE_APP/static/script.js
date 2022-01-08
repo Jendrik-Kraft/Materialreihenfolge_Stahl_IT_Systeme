@@ -20,16 +20,16 @@ function updateToleranz() {
     "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
 }
 function showPath() {
-  var tol_dicke = document.getElementById("input_dicke").value;
-  var tol_breite = document.getElementById("input_breite").value;
-  localStorage.getItem("Breite", tol_breite);
-  localStorage.getItem("Dicke", tol_dicke);
-  
-  // Change Button Text
   var currentText = document.getElementById("show_path").value;
   var newText;
+  var tolBreite = localStorage.getItem(tol_breite);
+  var tolDicke = localStorage.getItem(tol_dicke);
+  
+  // Change Button Text
+  
   if(currentText === "Zeige besten Pfad"){
-    location.href = "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke + "/bestpath";
+    location.href = 
+      "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke + "/bestpath";
     //location.href = 
       //"http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
     newText = "Zeige alle Pfade";
