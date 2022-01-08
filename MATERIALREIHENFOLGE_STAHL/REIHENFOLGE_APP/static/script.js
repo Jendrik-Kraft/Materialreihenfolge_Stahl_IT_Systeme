@@ -26,20 +26,19 @@ function showPath() {
   var path; 
   var tolBreite = localStorage.getItem("Breite");
   var tolDicke = localStorage.getItem("Dicke");
-  //location.href = 
-      //"http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/test";
-  
+   
   // Change Button Text
   if(currentText == "Zeige besten Pfad"){
     //path = "/bestpath";
     newText = "Zeige alle Pfade";
     document.getElementById("show_path").innerHTML = newText;
+    location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/bestpath";
   }
   else if(currentText == "Zeige alle Pfade"){
     path = "";
     newText = "Zeige besten Pfad";
     document.getElementById("show_path").innerHTML = newText;
+    location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke;
   }
-  location.href = 
-      "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + path;
+  
 }
