@@ -25,7 +25,7 @@ function showPath() {
   var newText;
   var path; 
   var tolBreite = localStorage.getItem("Breite");
-  var tolDicke = localStorage.getItem("Dicke";
+  var tolDicke = localStorage.getItem("Dicke");
   location.href = 
       "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/test";
   
