@@ -24,10 +24,10 @@ function showPath() {
   var currentText = document.getElementById("show_path").value;
   var newText;
   var path; 
-  var tolBreite = localStorage.getItem(tol_breite);
-  var tolDicke = localStorage.getItem(tol_dicke);
+  var tolBreite = localStorage.getItem("Breite");
+  var tolDicke = localStorage.getItem("Dicke";
   location.href = 
-      "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke + "/test";
+      "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/test";
   
   // Change Button Text
   /*if(currentText == "Zeige besten Pfad"){
