@@ -22,8 +22,7 @@ function updateToleranz() {
 
 function showPath() {
   var currentText = document.getElementById("show_path").value;
-  var newText;
-  var path; 
+  var newText = " ";
   var tolBreite = localStorage.getItem("Breite");
   var tolDicke = localStorage.getItem("Dicke");
    
@@ -31,14 +30,14 @@ function showPath() {
   if(currentText == "Zeige besten Pfad"){
     //path = "/bestpath";
     newText = "Zeige alle Pfade";
-    document.getElementById("show_path").innerHTML = newText;
+    document.getElementById("show_path").value = newText;
     //location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/bestpath";
     location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke;
   }
   else if(currentText == "Zeige alle Pfade"){
     path = "";
     newText = "Zeige besten Pfad";
-    document.getElementById("show_path").innerHTML = newText;
+    document.getElementById("show_path").value = newText;
     location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke;
   }
   
