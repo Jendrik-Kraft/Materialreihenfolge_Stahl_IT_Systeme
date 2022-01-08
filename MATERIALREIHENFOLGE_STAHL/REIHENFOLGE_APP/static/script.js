@@ -31,7 +31,7 @@ function showPath() {
   
   // Change Button Text
   if(currentText == "Zeige besten Pfad"){
-    path = "/bestpath";
+    //path = "/bestpath";
     newText = "Zeige alle Pfade";
     document.getElementById("show_path").innerHTML = newText;
   }
