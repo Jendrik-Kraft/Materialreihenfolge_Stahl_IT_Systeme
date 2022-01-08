@@ -5,6 +5,7 @@ if (!firstTime) {
   localStorage.setItem("first_time", "1");
   localStorage.setItem("Breite", "10");
   localStorage.setItem("Dicke", "10");
+  localStorage.setItem("buttonText", "Zeige besten Pfad");
 } else {
   location.href =
     "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
@@ -30,14 +31,16 @@ function showPath() {
   if(currentText == "Zeige besten Pfad"){
     //path = "/bestpath";
     newText = "Zeige alle Pfade";
-    document.getElementById("show_path").value = newText;
+    localStorage.setItem("buttonText", newText);
+    //document.getElementById("show_path").value = newText;
     //location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/bestpath";
     location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke;
   }
   else if(currentText == "Zeige alle Pfade"){
     path = "";
     newText = "Zeige besten Pfad";
-    document.getElementById("show_path").value = newText;
+    //document.getElementById("show_path").value = newText;
+    localStorage.setItem("buttonText", newText);
     location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke;
   }
   
