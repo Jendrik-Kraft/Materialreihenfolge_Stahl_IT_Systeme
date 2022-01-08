@@ -32,7 +32,8 @@ function showPath() {
     //path = "/bestpath";
     newText = "Zeige alle Pfade";
     document.getElementById("show_path").innerHTML = newText;
-    location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/bestpath";
+    //location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/bestpath";
+    location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke;
   }
   else if(currentText == "Zeige alle Pfade"){
     path = "";
