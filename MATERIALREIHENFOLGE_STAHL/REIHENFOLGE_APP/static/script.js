@@ -24,8 +24,20 @@ function showPath() {
   var tol_breite = document.getElementById("input_breite").value;
   localStorage.setItem("Breite", tol_breite);
   localStorage.setItem("Dicke", tol_dicke);
-  location.href =
-    "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke + "/quickpath";
+  
+  // Change Button Text
+  var currentText = document.getElementById("show_path").value;
+  var newText;
+  if(currentText === "Zeige besten Pfad"){
+    location.href = "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke + "/bestpath";
+    newText = "Zeige alle Pfade";
+    document.getElementById("show_path").value = newText;
+  };
+  else if(currentText === "Zeige alle Pfade"){
+    location.href = "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
+    newText = "Zeige besten Pfad";
+    document.getElementById("show_path").value = newText;
+  }
 }
 
 function onChangeAxisButtonClick() {
