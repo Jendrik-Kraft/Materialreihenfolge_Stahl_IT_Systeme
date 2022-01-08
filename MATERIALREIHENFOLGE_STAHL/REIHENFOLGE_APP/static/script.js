@@ -27,18 +27,18 @@ function showPath() {
   
   // Change Button Text
   
-  if(currentText === "Zeige besten Pfad"){
+  if(currentText == "Zeige besten Pfad"){
     location.href = 
       "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke + "/bestpath";
     //location.href = 
       //"http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
     newText = "Zeige alle Pfade";
-    document.getElementById("show_path").value = newText;
+    document.getElementById("show_path").innerHTML = newText;
   };
-  else if(currentText === "Zeige alle Pfade"){
+  else if(currentText == "Zeige alle Pfade"){
     location.href = 
       "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
     newText = "Zeige besten Pfad";
-    document.getElementById("show_path").value = newText;
+    document.getElementById("show_path").innerHTML = newText;
   }
 }
