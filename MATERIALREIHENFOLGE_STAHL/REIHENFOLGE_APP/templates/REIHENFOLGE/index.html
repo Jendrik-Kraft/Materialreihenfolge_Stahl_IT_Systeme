@@ -1,6 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
+    <style>
+      .center {
+              text-align: center;
+              }
+    </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Webside Test</title>
@@ -92,15 +97,24 @@
               </p>
             </div>
           </div>
-          <div class="columns">
-            <div class="column">
+          <div class="center">
+            <div class="column" >
               <button
                 class="button addBtn"
                 id="update_tol_Btn"
-                onclick="updateToleranz()"
-              >
+                onclick="updateToleranz()">
                 <!--onclick = Funktion ausführen-->
                 Neue Toleranzen anwenden &nbsp <i class="fas fa-check"></i>
+              </button>
+            </div>
+          </div>
+          <div class="center">
+            <div class="column" >
+              <button
+                class="button addBtn"
+                id="changeAxis_Btn"
+                onclick="onChangeAxisButtonClick()">
+                Achsen vertauschen
               </button>
             </div>
           </div>
