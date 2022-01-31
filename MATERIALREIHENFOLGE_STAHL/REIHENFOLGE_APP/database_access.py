@@ -15,7 +15,7 @@ def get_coils_from_access_db():
     # Checking Database Connection in MS Access
     # insert correct path
     try:
-        con_string = r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\jenny\Documents\Coils_Test.accdb;'
+        con_string = r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=.\Coils_Test.accdb;'
         conn = pyodbc.connect(con_string)
         print("Connected To Database")
 
@@ -31,6 +31,13 @@ def get_coils_from_access_db():
             # TODO: add column names
             # coils.columns = get_columns
             coils.head()
+            # load dummy coils:
+            cursor.execute('SELECT * FROM dummy_coils')
+            dummy_coils = pd.DataFrame(cursor.fetchall())
+            get_dummy_columns = [column[0] for column in cursor.description]
+            # TODO: add column names
+            # dummy_coils.columns = get_dummy_columns
+            dummy_coils.head()
 
         except pyodbc.Error as e:
             print("Error in Connection")
