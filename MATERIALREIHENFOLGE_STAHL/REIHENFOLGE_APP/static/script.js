@@ -15,7 +15,7 @@ if (!firstTime) {
 function updateToleranz() {
   var tol_dicke = document.getElementById("input_dicke").value;
   var tol_breite = document.getElementById("input_breite").value;
-  if((tol_dicke.length == 0) || (tol_breite.length == 0)){
+  if((typeof(tol_dicke) != 'undefined' && tol_dicke != null) || (typeof(tol_breite) != 'undefined' && tol_breite != null)){
     tol_dicke = "0";
     tol_breite = "0";
   }
