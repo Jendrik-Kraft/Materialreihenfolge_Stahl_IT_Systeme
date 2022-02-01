@@ -15,9 +15,9 @@ if (!firstTime) {
 function updateToleranz() {
   var tol_dicke = document.getElementById("input_dicke").value;
   var tol_breite = document.getElementById("input_breite").value;
-  if((tol_dicke === undefined) || (tol_breite === undefined)){
-    tol_dicke = 0;
-    tol_breite = 0;
+  if((typeof tol_dicke === 'undefined') || (typeof tol_breite === 'undefined')){
+    tol_dicke = "0";
+    tol_breite = "0";
   }
   localStorage.setItem("Breite", tol_breite);
   localStorage.setItem("Dicke", tol_dicke);
