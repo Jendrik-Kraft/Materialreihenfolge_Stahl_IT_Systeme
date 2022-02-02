@@ -13,14 +13,14 @@ if (!firstTime) {
 
 // Get Toleranzes and Store in LocalStorage
 function updateToleranz() {
-  var tol_dicke = document.getElementById("input_dicke").value;
-  var tol_breite = document.getElementById("input_breite").value;
+  var tol_dicke = document.getElementById("input_dicke");
+  var tol_breite = document.getElementById("input_breite");
   //if((typeof(tol_dicke) != 'undefined' && tol_dicke != null && tol_dicke != "") || (typeof(tol_breite) != 'undefined' && tol_breite != null && tol_breite != "")){
-  if(tol_dicke != null && tol_breite != null){
-    localStorage.setItem("Breite1", tol_breite);
-    localStorage.setItem("Dicke1", tol_dicke);
+  if((tol_dicke != null && tol_dicke.value != '') && (tol_breite != null %% tol_breite.value != '')){
+    localStorage.setItem("Breite1", tol_breite.value);
+    localStorage.setItem("Dicke1", tol_dicke.value);
     location.href =
-    "http://127.0.0.1:8000/display_graph/" + tol_breite + "15/50" + tol_dicke;
+    "http://127.0.0.1:8000/display_graph/" + tol_breite.value + "15/50" + tol_dicke.value;
   }
   else {
     localStorage.setItem("Breite", 0);
