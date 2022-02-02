@@ -15,7 +15,8 @@ if (!firstTime) {
 function updateToleranz() {
   var tol_dicke = document.getElementById("input_dicke").value;
   var tol_breite = document.getElementById("input_breite").value;
-  if((typeof(tol_dicke) != 'undefined' && tol_dicke != null && tol_dicke != "") || (typeof(tol_breite) != 'undefined' && tol_breite != null && tol_breite != "")){
+  //if((typeof(tol_dicke) != 'undefined' && tol_dicke != null && tol_dicke != "") || (typeof(tol_breite) != 'undefined' && tol_breite != null && tol_breite != "")){
+  if(tol_dicke && tol_breite){
     localStorage.setItem("Breite", tol_breite);
     localStorage.setItem("Dicke", tol_dicke);
     location.href =
