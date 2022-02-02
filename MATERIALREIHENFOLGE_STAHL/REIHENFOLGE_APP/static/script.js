@@ -34,7 +34,6 @@ function updateToleranz() {
     location.href = "http://127.0.0.1:8000/display_graph/0/0";
   }
 }
-
 function showPath() {
   var currentText = document.getElementById("show_path").value;
   var newText = " ";
