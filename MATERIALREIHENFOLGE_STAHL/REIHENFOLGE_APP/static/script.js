@@ -16,13 +16,17 @@ function updateToleranz() {
   var tol_dicke = document.getElementById("input_dicke").value;
   var tol_breite = document.getElementById("input_breite").value;
   if((typeof(tol_dicke) != 'undefined' && tol_dicke != null) || (typeof(tol_breite) != 'undefined' && tol_breite != null)){
-    tol_dicke = "0";
-    tol_breite = "0";
-  }
-  localStorage.setItem("Breite", tol_breite);
-  localStorage.setItem("Dicke", tol_dicke);
-  location.href =
+    localStorage.setItem("Breite", tol_breite);
+    localStorage.setItem("Dicke", tol_dicke);
+    location.href =
     "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
+  }
+  else {
+    localStorage.setItem("Breite", 0);
+    localStorage.setItem("Dicke", 0);
+    location.href =
+    "http://127.0.0.1:8000/display_graph/0/0";
+  }
 }
 
 function showPath() {
