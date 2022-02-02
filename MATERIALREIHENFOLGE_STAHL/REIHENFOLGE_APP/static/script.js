@@ -33,8 +33,8 @@ function updateToleranz() {
     localStorage.setItem("Breite", 0);
     localStorage.setItem("Dicke", 0);
     location.href = "http://127.0.0.1:8000/display_graph/0/0";
+  }
 }
-
 function showPath() {
   var currentText = document.getElementById("show_path").value;
   var newText = " ";
