@@ -46,5 +46,7 @@ def get_coils_from_database():
 
     except pyodbc.Error as e:
         print("Error in Connection")
+        coils = None
+        dummy_coils = None
 
     return [coils, dummy_coils]
