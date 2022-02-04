@@ -18,5 +18,6 @@ from . import views
 
 urlpatterns = [
     path('', views.hi, name="home-page"),
+    path('display_graph/<int:dicke>/<int:breite>/<str:pfade>', views.hi, name="home-page"),
     path('display_graph/<int:dicke>/<int:breite>', views.hi, name="home-page"),
 ]

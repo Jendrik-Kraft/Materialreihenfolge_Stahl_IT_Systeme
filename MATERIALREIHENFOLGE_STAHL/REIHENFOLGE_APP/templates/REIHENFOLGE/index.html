@@ -8,7 +8,9 @@
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Webside Test</title>
+    <title>Stehling Stahl - Materialreihenfolge</title>
+    <link rel = "icon" href ="https://raw.githubusercontent.com/Jendrik-Kraft/Materialreihenfolge_Stahl_IT_Systeme/Icon/MATERIALREIHENFOLGE_STAHL/REIHENFOLGE_APP/templates/REIHENFOLGE/StealIcon.png"
+      type = "image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"></script>
     <link
       rel="stylesheet"
@@ -108,6 +110,21 @@
               </button>
             </div>
           </div>
+          <div class="columns">
+            <div class="column">
+              <input
+                type = "button"
+                class="button addBtn"
+                style="width: 255px;"
+                id="show_path"
+                onclick="showPath()"
+                value = "Zeige besten Pfad"
+              />
+                <!--onclick = Funktion ausführen-->
+                <!--Zeige besten Pfad-->
+              <!--</button>-->
+            </div>
+          </div>
           <div class="center">
             <div class="column" >
               <button
@@ -195,6 +212,8 @@
           },
         },
       });
+      // Änderung der Button - Beschriftung für show_path
+      document.getElementById("show_path").value = localStorage.getItem("buttonText");
     </script>
   </body>
 </html>

@@ -7,7 +7,7 @@ from .database import *
 from .utility import *
 
 
-def hi(request, dicke=0, breite=0):
+def hi(request, dicke=0, breite=0, pfade="all"):
     [coils, dummy_coils] = get_coils_from_database()
     coil_list_for_js = build_coil_list_for_js(coils)
     fitting_coils = find_fusible_coils(coils, breite, dicke)
