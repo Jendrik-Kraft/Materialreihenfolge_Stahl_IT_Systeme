@@ -8,7 +8,7 @@ if (!firstTime) {
   localStorage.setItem("buttonText", "Zeige besten Pfad");
 } else {
   location.href =
-    "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
+    "http://127.0.0.1:8000/display_graph/" + localStorage.getItem("Breite") + "/" + localStorage.getItem("Dicke");
 }
 
 function updateToleranz() {
