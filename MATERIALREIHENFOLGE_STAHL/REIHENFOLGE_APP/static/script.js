@@ -57,5 +57,11 @@ function showPath() {
     localStorage.setItem("buttonText", newText);
     location.href =
       "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke;
-  }
+  }  
+}
+
+function onChangeAxisButtonClick() {
+  var coils = coils
+  var xAchse_Name = "Breite";
+      var yAchse_Name = "Dicke";
 }
