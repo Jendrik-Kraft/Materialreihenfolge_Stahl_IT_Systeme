@@ -3,14 +3,17 @@
   <head>
     <style>
       .center {
-              text-align: center;
-              }
+        text-align: center;
+      }
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stehling Stahl - Materialreihenfolge</title>
-    <link rel = "icon" href ="https://raw.githubusercontent.com/Jendrik-Kraft/Materialreihenfolge_Stahl_IT_Systeme/Icon/MATERIALREIHENFOLGE_STAHL/REIHENFOLGE_APP/templates/REIHENFOLGE/StealIcon.png"
-      type = "image/x-icon">
+    <link
+      rel="icon"
+      href="https://raw.githubusercontent.com/Jendrik-Kraft/Materialreihenfolge_Stahl_IT_Systeme/Icon/MATERIALREIHENFOLGE_STAHL/REIHENFOLGE_APP/templates/REIHENFOLGE/StealIcon.png"
+      type="image/x-icon"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"></script>
     <link
       rel="stylesheet"
@@ -25,7 +28,7 @@
   </head>
   <body>
     <!-- hero: https://bulma.io/documentation/layout/hero/ -->
-    <section class="hero is-primary">
+    <section class="hero is-info">
       <div class="hero-body">
         <h1 class="title">Materialreihenfolge</h1>
         <p class="subtitle">
@@ -34,12 +37,12 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section has-background-grey-lighter">
       <div class="columns">
-        <div class="column is-three-quarters">
+        <div class="column is-three-quarters has-background-white-bis">
           <canvas id="myChart"></canvas>
         </div>
-        <div class="container notification is-info">
+        <div class="container notification has-background-grey-light">
           <!-- columns: https://bulma.io/documentation/columns/basics/ -->
           <div class="columns">
             <div class="column">
@@ -76,7 +79,7 @@
               <div id="myDIV" class="header">
                 <div class="control has-icons-left">
                   <input
-                    class="input is-medium"
+                    class="input is-medium is-size-5"
                     type="text"
                     id="input_breite"
                     placeholder="Eingabe der Toleranzbreite in Millimeter [mm]"
@@ -100,38 +103,39 @@
             </div>
           </div>
           <div class="center">
-            <div class="column" >
+            <div class="column">
               <button
                 class="button addBtn"
                 id="update_tol_Btn"
-                onclick="updateToleranz()">
+                onclick="updateToleranz()"
+              >
                 <!--onclick = Funktion ausführen-->
                 Neue Toleranzen anwenden &nbsp <i class="fas fa-check"></i>
               </button>
             </div>
           </div>
-          <div class="columns">
+          <div class="center">
             <div class="column">
               <input
-                type = "button"
+                type="button"
                 class="button addBtn"
-                style="width: 255px;"
                 id="show_path"
                 onclick="showPath()"
-                value = "Zeige besten Pfad"
+                value="Zeige besten Pfad"
               />
-                <!--onclick = Funktion ausführen-->
-                <!--Zeige besten Pfad-->
+              <!--onclick = Funktion ausführen-->
+              <!--Zeige besten Pfad-->
               <!--</button>-->
             </div>
           </div>
           <div class="center">
-            <div class="column" >
+            <div class="column">
               <button
                 class="button addBtn"
                 id="changeAxis_Btn"
-                onclick="onChangeAxisButtonClick()">
-                Achsen vertauschen
+                onclick="onChangeAxisButtonClick()"
+              >
+                Achsen vertauschen &nbsp <i class="fas fa-exchange-alt"></i>
               </button>
             </div>
           </div>
