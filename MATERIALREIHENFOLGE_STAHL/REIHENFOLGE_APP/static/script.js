@@ -32,7 +32,14 @@ function updateToleranz() {
   } else {
     localStorage.setItem("Breite", 0);
     localStorage.setItem("Dicke", 0);
-    location.href = "http://127.0.0.1:8000/display_graph/0/0";
+    tol_dicke.setCustomValidity("");
+    tol_breite.setCustomValidity("");
+    if(tol_dicke.value == ""){
+    tol_dicke.setCustomValidity("Invalid field.");
+    }
+    if(tol_breite.value == ""){
+    tol_breite.setCustomValidity("Invalid field.");
+    }
   }
 }
 function showPath() {
