@@ -3,8 +3,10 @@
   <head>
     <style>
       .center {
-        text-align: center;
-      }
+              text-align: center;
+              }
+      input:invalid { background: red; }
+      input:valid { background: white; }
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -39,19 +41,21 @@
 
     <section class="section has-background-grey-lighter">
       <div class="columns">
-        <div class="column is-three-quarters has-background-white-bis">
+        <div class="column is-three-quarters has-background-white-bis" style="font-size:14px">
           <canvas id="myChart"></canvas>
         </div>
         <div class="container notification has-background-grey-light">
           <!-- columns: https://bulma.io/documentation/columns/basics/ -->
           <div class="columns">
             <div class="column">
-              <p class="is-size-4 has-text-centered">Toleranz Dicke [%]</p>
+              <p class="is-size-4 has-text-centered" >Toleranz Dicke [%]</p>
               <div id="myDIV" class="header">
                 <div class="control has-icons-left">
                   <input
                     class="input is-medium"
-                    type="text"
+                    type="number"
+                    min="1"
+                    max="100"
                     id="input_dicke"
                     placeholder="Eingabe der Toleranzdicke in Prozent [%]"
                   />
@@ -80,7 +84,9 @@
                 <div class="control has-icons-left">
                   <input
                     class="input is-medium is-size-5"
-                    type="text"
+                    type="number"
+                    min="1"
+                    max="1000"
                     id="input_breite"
                     placeholder="Eingabe der Toleranzbreite in Millimeter [mm]"
                   />
@@ -106,6 +112,7 @@
             <div class="column">
               <button
                 class="button addBtn"
+                style="width: 255px;"
                 id="update_tol_Btn"
                 onclick="updateToleranz()"
               >
@@ -132,6 +139,7 @@
             <div class="column">
               <button
                 class="button addBtn"
+                style="width: 255px;"
                 id="changeAxis_Btn"
                 onclick="onChangeAxisButtonClick()"
               >
@@ -154,7 +162,7 @@
           datasets: [
             {
               type: "scatter",
-              pointRadius: 4,
+              pointRadius: 6,
               pointBackgroundColor: "rgb(0,0,255)",
               data: coils,
             },
@@ -176,6 +184,8 @@
           plugins: {
             legend: false,
             tooltip: {
+              titleFont: { size: 18 },
+              bodyFont: { size: 18, weight: 'bold' },
               callbacks: {
                 title: function(tooltipItem) {
                     title = 'Dicke: ' + tooltipItem[0].parsed.x;
@@ -200,15 +210,29 @@
           //events: [], //um alle Interaktionen mit der Chart zu deaktivieren
           scales: {
             x: {
-              ticks: { min: 40, max: 160 },
+              ticks: {
+              font: {
+                        size: 19
+                    },
+              min: 40, max: 160 },
               title: {
+              font: {
+                        size: 21
+                    },
                 display: true,
                 text: xAchse_Name,
               },
             },
             y: {
-              ticks: { min: 6, max: 16 },
+              ticks: {
+              font: {
+                        size: 19
+                    },
+              min: 6, max: 16 },
               title: {
+              font: {
+                        size: 21
+                    },
                 display: true,
                 text: yAchse_Name,
               },
