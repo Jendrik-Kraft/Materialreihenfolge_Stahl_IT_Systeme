@@ -158,6 +158,15 @@
       var coils = {{ coils|safe }} ;// Laden aus der Python Datei
       //var dummy = {{ dummy_coils|safe }} // Laden aus der Python Datei
       var connections = {{ connections|safe }} ;// Laden aus der Python Datei
+      if(localStorage.getItem("tauschen")==1){
+        var coils_string=JSON.stringify(coils);
+        var coils_reverse = coils_string.replaceAll("x","a");
+        coils_reverse = coils_reverse.replaceAll("y","x");
+        coils_reverse = coils_reverse.replaceAll("a","y");
+        coils=JSON.parse(coils_reverse);
+        xAchse_Name="Breite";
+        yAchse_Name="Dicke";
+      }
       new Chart("myChart", {
         data: {
           datasets: [
@@ -167,12 +176,7 @@
               pointBackgroundColor: "rgb(0,0,255)",
               data: coils,
             },
-            /*{
-              type: "scatter",
-              pointRadius: 4,
-              pointBackgroundColor: "rgb(255,0,0)",
-              data: dummy,
-            },*/
+            
             {
               type: "line",
               backgroundColor: "rgba(0,0,0,1.0)",

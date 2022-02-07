@@ -6,6 +6,7 @@ if (!firstTime) {
   localStorage.setItem("Breite", "10");
   localStorage.setItem("Dicke", "10");
   localStorage.setItem("buttonText", "Zeige besten Pfad");
+  localStorage.setItem("tauschen", 0);
 } else {
   location.href =
     "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
@@ -68,7 +69,11 @@ function showPath() {
 }
 
 function onChangeAxisButtonClick() {
-  var coils = coils
-  var xAchse_Name = "Breite";
-      var yAchse_Name = "Dicke";
+  var tauschen = localStorage.getItem("tauschen");;
+  if (tauschen==0){
+    localStorage.setItem("tauschen", 1);
+  }
+  else{localStorage.setItem("tauschen", 0);}
+  location.href =
+    "http://127.0.0.1:8000";
 }
