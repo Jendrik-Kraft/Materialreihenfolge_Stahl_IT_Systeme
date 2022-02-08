@@ -83,15 +83,17 @@ function onChangeAxisButtonClick() {
   } else {
     localStorage.setItem("tauschen", 0);
   }
-  location.href = "http://127.0.0.1:8000";
+  location.href =
+    "http://127.0.0.1:8000/display_graph/" +
+    localStorage.getItem("Breite") +
+    "/" +
+    localStorage.getItem("Dicke");
 }
 
 function onChangeToMainpageButtonClick() {
-    location.href =
-    "http://127.0.0.1:8000/display_graph/10/10";
+  location.href = "http://127.0.0.1:8000/display_graph/10/10";
 }
 
 function onChangeToEditpageButtonClick() {
-    location.href =
-    "http://127.0.0.1:8000/edit-database";
+  location.href = "http://127.0.0.1:8000/edit-database";
 }

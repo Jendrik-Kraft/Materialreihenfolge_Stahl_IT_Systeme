@@ -159,7 +159,7 @@
             <div class="column">
               <button
                 class="button addBtn"
-                style="width: 255px;"
+                style="width: 255px"
                 id="changeWndw_Btn"
                 onclick="onChangeToEditpageButtonClick()"
               >
@@ -182,7 +182,15 @@
         var coils_reverse = coils_string.replaceAll("x","a");
         coils_reverse = coils_reverse.replaceAll("y","x");
         coils_reverse = coils_reverse.replaceAll("a","y");
-        coils=JSON.parse(coils_reverse);
+        coils = JSON.parse(coils_reverse);
+
+
+        var connections_string=JSON.stringify(connections);
+        var connections_reverse = connections_string.replaceAll("x","a");
+        connections_reverse = connections_reverse.replaceAll("y","x");
+        connections_reverse = connections_reverse.replaceAll("a","y");
+        connections = JSON.parse(connections_reverse);
+
         xAchse_Name="Breite";
         yAchse_Name="Dicke";
       }
