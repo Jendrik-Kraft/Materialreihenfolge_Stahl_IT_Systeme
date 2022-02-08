@@ -3,10 +3,14 @@
   <head>
     <style>
       .center {
-              text-align: center;
-              }
-      input:invalid { background: red; }
-      input:valid { background: white; }
+        text-align: center;
+      }
+      input:invalid {
+        background: red;
+      }
+      input:valid {
+        background: white;
+      }
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,14 +45,17 @@
 
     <section class="section has-background-grey-lighter">
       <div class="columns">
-        <div class="column is-three-quarters has-background-white-bis" style="font-size:14px">
+        <div
+          class="column is-three-quarters has-background-white-bis"
+          style="font-size: 14px"
+        >
           <canvas id="myChart"></canvas>
         </div>
         <div class="container notification has-background-grey-light">
           <!-- columns: https://bulma.io/documentation/columns/basics/ -->
           <div class="columns">
             <div class="column">
-              <p class="is-size-4 has-text-centered" >Toleranz Dicke [%]</p>
+              <p class="is-size-4 has-text-centered">Toleranz Dicke [%]</p>
               <div id="myDIV" class="header">
                 <div class="control has-icons-left">
                   <input
@@ -112,7 +119,7 @@
             <div class="column">
               <button
                 class="button addBtn"
-                style="width: 255px;"
+                style="width: 255px"
                 id="update_tol_Btn"
                 onclick="updateToleranz()"
               >
@@ -125,7 +132,7 @@
             <div class="column">
               <input
                 type="button"
-                style="width: 255px;"
+                style="width: 255px"
                 class="button addBtn"
                 id="show_path"
                 onclick="showPath()"
@@ -140,7 +147,7 @@
             <div class="column">
               <button
                 class="button addBtn"
-                style="width: 255px;"
+                style="width: 255px"
                 id="changeAxis_Btn"
                 onclick="onChangeAxisButtonClick()"
               >
@@ -176,7 +183,7 @@
               pointBackgroundColor: "rgb(0,0,255)",
               data: coils,
             },
-            
+
             {
               type: "line",
               backgroundColor: "rgba(0,0,0,1.0)",

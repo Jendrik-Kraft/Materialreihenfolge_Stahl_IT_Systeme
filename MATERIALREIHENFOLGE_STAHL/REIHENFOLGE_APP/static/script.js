@@ -1,15 +1,19 @@
 // First Load of the WebSide
 var firstTime = localStorage.getItem("first_time");
+
 if (!firstTime) {
   // first time loaded!
   localStorage.setItem("first_time", "1");
-  localStorage.setItem("Breite", "10");
-  localStorage.setItem("Dicke", "10");
+  localStorage.setItem("Breite", "0");
+  localStorage.setItem("Dicke", "0");
   localStorage.setItem("buttonText", "Zeige besten Pfad");
   localStorage.setItem("tauschen", 0);
-} else {
+} else if (firstTime == 1) {
+  var tol_breite = localStorage.getItem("Breite");
+  var tol_dicke = localStorage.getItem("Dicke");
   location.href =
     "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
+  localStorage.setItem("first_time", "2");
 }
 
 function updateToleranz() {
@@ -35,11 +39,11 @@ function updateToleranz() {
     localStorage.setItem("Dicke", 0);
     tol_dicke.setCustomValidity("");
     tol_breite.setCustomValidity("");
-    if(tol_dicke.value == ""){
-    tol_dicke.setCustomValidity("Invalid field.");
+    if (tol_dicke.value == "") {
+      tol_dicke.setCustomValidity("Invalid field.");
     }
-    if(tol_breite.value == ""){
-    tol_breite.setCustomValidity("Invalid field.");
+    if (tol_breite.value == "") {
+      tol_breite.setCustomValidity("Invalid field.");
     }
   }
 }
@@ -57,7 +61,11 @@ function showPath() {
     //document.getElementById("show_path").value = newText;
     //location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/bestpath";
     location.href =
-      "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/best_path";
+      "http://127.0.0.1:8000/display_graph/" +
+      tolBreite +
+      "/" +
+      tolDicke +
+      "/best_path";
   } else if (currentText == "Zeige alle Pfade") {
     path = "";
     newText = "Zeige besten Pfad";
@@ -65,15 +73,15 @@ function showPath() {
     localStorage.setItem("buttonText", newText);
     location.href =
       "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke;
-  }  
+  }
 }
 
 function onChangeAxisButtonClick() {
-  var tauschen = localStorage.getItem("tauschen");;
-  if (tauschen==0){
+  var tauschen = localStorage.getItem("tauschen");
+  if (tauschen == 0) {
     localStorage.setItem("tauschen", 1);
+  } else {
+    localStorage.setItem("tauschen", 0);
   }
-  else{localStorage.setItem("tauschen", 0);}
-  location.href =
-    "http://127.0.0.1:8000";
+  location.href = "http://127.0.0.1:8000";
 }
