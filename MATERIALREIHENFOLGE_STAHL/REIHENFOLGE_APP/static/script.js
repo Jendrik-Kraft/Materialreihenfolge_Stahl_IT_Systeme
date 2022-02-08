@@ -86,12 +86,12 @@ function onChangeAxisButtonClick() {
   location.href = "http://127.0.0.1:8000";
 }
 
-function onChangeToMainpageButtonClick() {
+function onChangeToMainPageButtonClick() {
     location.href =
     "http://127.0.0.1:8000/display_graph/10/10";
 }
 
-function onChangeToEditpageButtonClick() {
+function onChangeToEditPageButtonClick() {
     location.href =
-    "http://127.0.0.1:8000/edit-database";
+    "http://127.0.0.1:8000/edit_database/test";
 }
