@@ -3,14 +3,10 @@
   <head>
     <style>
       .center {
-        text-align: center;
-      }
-      input:invalid {
-        background: red;
-      }
-      input:valid {
-        background: white;
-      }
+              text-align: center;
+              }
+      input:invalid { background: red; }
+      input:valid { background: white; }
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -45,17 +41,11 @@
 
     <section class="section has-background-grey-lighter">
       <div class="columns">
-        <div
-          class="column is-three-quarters has-background-white-bis"
-          style="font-size: 14px"
-        >
-          <canvas id="myChart"></canvas>
-        </div>
         <div class="container notification has-background-grey-light">
           <!-- columns: https://bulma.io/documentation/columns/basics/ -->
           <div class="columns">
             <div class="column">
-              <p class="is-size-4 has-text-centered">Toleranz Dicke [%]</p>
+              <p class="is-size-4 has-text-centered" >Toleranz Dicke [%]</p>
               <div id="myDIV" class="header">
                 <div class="control has-icons-left">
                   <input
@@ -119,7 +109,7 @@
             <div class="column">
               <button
                 class="button addBtn"
-                style="width: 255px"
+                style="width: 255px;"
                 id="update_tol_Btn"
                 onclick="updateToleranz()"
               >
@@ -132,7 +122,7 @@
             <div class="column">
               <input
                 type="button"
-                style="width: 255px"
+                style="width: 255px;"
                 class="button addBtn"
                 id="show_path"
                 onclick="showPath()"
@@ -147,23 +137,10 @@
             <div class="column">
               <button
                 class="button addBtn"
-                style="width: 255px"
-                id="changeAxis_Btn"
-                onclick="onChangeAxisButtonClick()"
-              >
-                Achsen vertauschen &nbsp <i class="fas fa-exchange-alt"></i>
-              </button>
-            </div>
-          </div>
-          <div class="center">
-            <div class="column">
-              <button
-                class="button addBtn"
                 style="width: 255px;"
-                id="changeWndw_Btn"
-                onclick="onChangeToEditpageButtonClick()"
-              >
-                Datenbank editieren
+                id="changeToMainpage_Btn"
+                onclick="onChangeToMainpageButtonClick()">
+                Zur Startseite wechseln &nbsp <i class="fas fa-exchange-alt"></i>
               </button>
             </div>
           </div>
@@ -172,98 +149,10 @@
     </section>
 
     <script>
-      var xAchse_Name = "Dicke";
-      var yAchse_Name = "Breite";
       var coils = {{ coils|safe }} ;// Laden aus der Python Datei
       //var dummy = {{ dummy_coils|safe }} // Laden aus der Python Datei
-      var connections = {{ connections|safe }} ;// Laden aus der Python Datei
-      if(localStorage.getItem("tauschen")==1){
-        var coils_string=JSON.stringify(coils);
-        var coils_reverse = coils_string.replaceAll("x","a");
-        coils_reverse = coils_reverse.replaceAll("y","x");
-        coils_reverse = coils_reverse.replaceAll("a","y");
-        coils=JSON.parse(coils_reverse);
-        xAchse_Name="Breite";
-        yAchse_Name="Dicke";
-      }
-      new Chart("myChart", {
-        data: {
-          datasets: [
-            {
-              type: "scatter",
-              pointRadius: 6,
-              pointBackgroundColor: "rgb(0,0,255)",
-              data: coils,
-            },
 
-            {
-              type: "line",
-              backgroundColor: "rgba(0,0,0,1.0)",
-              borderColor: "rgba(0,0,0,1)",
-              data: connections,
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            legend: false,
-            tooltip: {
-              titleFont: { size: 18 },
-              bodyFont: { size: 18, weight: 'bold' },
-              callbacks: {
-                title: function(tooltipItem) {
-                    title = 'Dicke: ' + tooltipItem[0].parsed.x;
-                    return title;
-                },
-                label: function(context) {
-                    let label = context.dataset.label || '';
 
-                    if (label) {
-                        label += ': ';
-                    }
-                    label = 'Breite: ' + context.parsed.y;
-                    return label;
-                },
-              },
-              displayColors: false,
-            },
-          },
-          interaction: {
-            mode: "index",
-          },
-          //events: [], //um alle Interaktionen mit der Chart zu deaktivieren
-          scales: {
-            x: {
-              ticks: {
-              font: {
-                        size: 19
-                    },
-              min: 40, max: 160 },
-              title: {
-              font: {
-                        size: 21
-                    },
-                display: true,
-                text: xAchse_Name,
-              },
-            },
-            y: {
-              ticks: {
-              font: {
-                        size: 19
-                    },
-              min: 6, max: 16 },
-              title: {
-              font: {
-                        size: 21
-                    },
-                display: true,
-                text: yAchse_Name,
-              },
-            },
-          },
-        },
-      });
       // Änderung der Button - Beschriftung für show_path
       document.getElementById("show_path").value = localStorage.getItem("buttonText");
     </script>

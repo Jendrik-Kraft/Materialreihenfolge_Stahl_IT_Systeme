@@ -20,4 +20,5 @@ urlpatterns = [
     path('', views.mainpage, name="home-page"),
     path('display_graph/<int:dicke>/<int:breite>/<str:pfade>', views.mainpage, name="home-page"),
     path('display_graph/<int:dicke>/<int:breite>', views.mainpage, name="home-page"),
+    path('edit_database', views.editpage, name="home-page"),
 ]

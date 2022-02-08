@@ -85,3 +85,13 @@ function onChangeAxisButtonClick() {
   }
   location.href = "http://127.0.0.1:8000";
 }
+
+function onChangeToMainpageButtonClick() {
+    location.href =
+    "http://127.0.0.1:8000/display_graph/10/10";
+}
+
+function onChangeToEditpageButtonClick() {
+    location.href =
+    "http://127.0.0.1:8000/edit-database";
+}

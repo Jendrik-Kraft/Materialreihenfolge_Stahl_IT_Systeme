@@ -12,5 +12,13 @@ def mainpage(request, dicke=0, breite=0, pfade="all"):
     coils = round(coils, 2)
     coil_list_for_js = build_coil_list_for_js(coils)
     fitting_coils = find_fusible_coils(coils, breite, dicke)
+    #fitting_coils = [int(x) for x in fitting_coils]
     fitting_coils_for_js = build_fitting_coils_list_for_js(coils, fitting_coils)
     return render(request, 'REIHENFOLGE/index.html', {"coils": coil_list_for_js, "connections": fitting_coils_for_js})
+
+
+def editpage():
+    [coils, dummy_coils] = get_coils_from_database()
+    coils = round(coils, 2)
+    coil_list_for_js = build_coil_list_for_js(coils)
+    return render('REIHENFOLGE/editPage.html', {"coils": coil_list_for_js})

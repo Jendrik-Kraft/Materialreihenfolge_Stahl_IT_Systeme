@@ -27,9 +27,9 @@ def find_fusible_coils(coils, tolerance_h_per, tolerance_w_abs):
 
                 # Append coil to the list with lower coil value first - to delete duplicate entry e.g. [1 5] and [5 1]
                 if coil[0] < coil_compare[0]:
-                    fusible_coils_temp.append([coil[0], coil_compare[0]])
+                    fusible_coils_temp.append([int(coil[0]), int(coil_compare[0])])
                 else:
-                    fusible_coils_temp.append([coil_compare[0], coil[0]])
+                    fusible_coils_temp.append([int(coil_compare[0]), int(coil[0])])
 
     fusible_coils = []
     # Delete duplicate entries
