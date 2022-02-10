@@ -52,24 +52,8 @@
       <div class="columns">
         <div class="container notification has-background-grey-light">
           <!-- columns: https://bulma.io/documentation/columns/basics/ -->
-          <div class="scoreboard">
-            <table class="scoreboardTable"
-            contenteditable="true">
-              <thead class="scoreboardTableHead">
-              <tr class="scoreboardTableHeaderRow" contenteditable="false">
-                <th>ID</th>
-                <th>Dicke</th>
-                <th>Breite</th>
-              </tr>
-              </thead>
-              <tbody class="scoreboardTable-Body"
-                     contenteditable="true"></tbody>
-              <tr class="scoreboardTableBodyRow">
-                <td>1</td>
-                <td >1.1</td>
-                <td>100</td>
-              </tr>
-            </table>
+          <div class="coilTable">
+
           </div>
 
           <div class="center">
@@ -81,7 +65,15 @@
                 onclick="onChangeToMainPageButtonClick()">
                 Zur Startseite wechseln
               </button>
+              <button
+                class="button addBtn"
+                style="width: 255px;"
+                id="saveChanges_Btn"
+                onclick="onSaveChangesButtonClick()">
+                Änderungen speichern
+              </button>
             </div>
+
           </div>
         </div>
       </div>
