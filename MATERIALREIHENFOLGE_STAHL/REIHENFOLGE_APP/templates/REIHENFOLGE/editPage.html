@@ -35,9 +35,9 @@
       src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
     ></script>
     {% load static %}
-    <script type="text/javascript" src="{% static 'script.js' %}"></script>
+    <script type="text/javascript" src="{% static 'editPageScript.js' %}"></script>
   </head>
-  <body>
+  <body onload="buildTable();">
     <!-- hero: https://bulma.io/documentation/layout/hero/ -->
     <section class="hero is-info">
       <div class="hero-body">
@@ -70,18 +70,6 @@
                 <td>100</td>
               </tr>
             </table>
-          </div>
-
-          <div class="center">
-            <div class="column">
-              <button
-                class="button addBtn"
-                style="width: 255px;"
-                id="Test_Btn"
-                onclick="onTestButtonClick()">
-                Test Knopf
-              </button>
-            </div>
           </div>
 
           <div class="center">
