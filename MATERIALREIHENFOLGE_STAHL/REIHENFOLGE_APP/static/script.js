@@ -14,6 +14,8 @@ if (!firstTime) {
   location.href =
     "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
   localStorage.setItem("first_time", "2");
+} else if (firstTime == 2) {
+  localStorage.setItem("first_time", "1");
 }
 
 function updateToleranz() {
@@ -91,6 +93,5 @@ function onChangeAxisButtonClick() {
 }
 
 function onChangeToEditPageButtonClick() {
-    location.href =
-    "http://127.0.0.1:8000/edit_database/test";
+  location.href = "http://127.0.0.1:8000/edit_database/test";
 }
