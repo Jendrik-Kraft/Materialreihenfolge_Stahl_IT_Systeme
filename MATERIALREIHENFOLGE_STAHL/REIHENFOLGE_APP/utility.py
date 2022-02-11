@@ -107,34 +107,37 @@ def generate_path(coils, dummy_coils, tolerance_h_per, tolerance_w_abs):
     """
     This function compares the number of dummy coils for different path-finding algorithms and returns the complete coil
     list of the path with the lowest number of dummy coils.
-    :param coils:
-    :param dummy_coils:
-    :param tolerance_h_per:
-    :param tolerance_w_abs:
-    :return:
+    :param coils: List of coils to fuse
+    :param dummy_coils: List of available dummy coils
+    :param tolerance_h_per: Hight tolerance in percent
+    :param tolerance_w_abs: Width tolerance in absolute [mm]
+    :return: Shortes complete coil list with coils and dummy coils in the order to fuse them, or -1 if a fuse of the
+             coils with the available dummy-coils is not possible at all
     """
 
     # Path Option 1:
     #   - Sort coil list based on hight + width
-    coils_path1 = coils.sort_values(by=['Hight','Width'], ignore_index=True)
+    coils_path1 = coils.sort_values(by=['Hight', 'Width'], ignore_index=True)
     complete_coil_list_path1 = get_complete_coil_list(coils_path1, dummy_coils, tolerance_h_per, tolerance_w_abs)
 
     # Path Option 2:
     #   - Sort coil list based on width + hight
-    coils_path2 = coils.sort_values(by=['Width','Hight'], ignore_index=True)
+    coils_path2 = coils.sort_values(by=['Width', 'Hight'], ignore_index=True)
     complete_coil_list_path2 = get_complete_coil_list(coils_path2, dummy_coils, tolerance_h_per, tolerance_w_abs)
 
-    # Checke ob Pfade möglich sind
-    if not isinstance(coils_path1, pd.DataFrame): # Pfad 1 nicht möglich
-        if isinstance(coils_path2, pd.DataFrame): # Pfad 1 nicht möglich, Pfad 2 möglich
+    # Prüfe auf gültigkeit der beiden Path Optionen
+    if not isinstance(complete_coil_list_path1, pd.DataFrame):  # Pfad 1 nicht möglich
+        if isinstance(complete_coil_list_path2, pd.DataFrame):  # Pfad 1 nicht möglich, Pfad 2 möglich
             return complete_coil_list_path2
-        else:   # Pfad 1 und Pfad 2 nicht möglich
+        else:  # Pfad 1 und Pfad 2 nicht möglich
             return -1
-    else:   # Pfad 1 möglich
-        if not isinstance(coils_path2, pd.DataFrame):   # Pfad 2 nicht möglich
+    else:  # Pfad 1 möglich
+        if not isinstance(complete_coil_list_path2, pd.DataFrame):  # Pfad 1 möglich, Pfad 2 nicht möglich
             return complete_coil_list_path1
-        else:   # Pfad 1 und Pfad 2 möglich: Verwende Pfad mit weniger Dummy-Coils
-            if(len(complete_coil_list_path1[complete_coil_list_path1['dummy'] == True]) < len(complete_coil_list_path2[complete_coil_list_path2['dummy'] == True])):
+        else:  # Pfad 1 und Pfad 2 möglich: Verwende Pfad mit weniger Dummy-Coils
+            # Überprüfe ob dummycoils vorhanden
+            if (len(complete_coil_list_path1[complete_coil_list_path1['dummy'] == True]) < len(
+                    complete_coil_list_path2[complete_coil_list_path2['dummy'] == True])):
                 return complete_coil_list_path1
             else:
                 return complete_coil_list_path2
@@ -143,48 +146,49 @@ def get_complete_coil_list(coils, dummy_coils, tolerance_h_per, tolerance_w_abs)
     """
     This function gets the complete coil list for a selected path of coils (as sorted in the given "coil" parameter),
     including dummy-coils.
-    :param coils:
-    :param dummy_coils:
-    :param tolerance_h_per:
-    :param tolerance_w_abs:
-    :return:
+    :param coils: List of coils to fuse
+    :param dummy_coils: List of available dummy coils
+    :param tolerance_h_per: Hight tolerance in percent
+    :param tolerance_w_abs: Width tolerance in absolute [mm]
+    :return: Complete coil list with coils and dummy coils in the order to fuse them
     """
 
     # Add additional rows to coils pandas dataframe
     # tolerance_h, h_min, h_max
-    coils['tolerance_h'] = tolerance_h_per/100*coils.Hight
-    coils['tolerance_h_bottom'] = coils.Hight-coils.tolerance_h # ToDo: negative = 0 setzen
-    coils['tolerance_h_top'] = coils.Hight+coils.tolerance_h
+    coils['tolerance_h'] = tolerance_h_per / 100 * coils.Hight
+    coils['tolerance_h_bottom'] = coils.Hight - coils.tolerance_h
+    coils['tolerance_h_top'] = coils.Hight + coils.tolerance_h
     # tolerance_w, w_min, w_max
     coils['tolerance_w'] = tolerance_w_abs
-    coils['tolerance_w_bottom'] = coils.Width-coils.tolerance_w # ToDo: negative = 0 setzen
-    coils['tolerance_w_top'] = coils.Width+coils.tolerance_w
+    coils['tolerance_w_bottom'] = coils.Width - coils.tolerance_w
+    coils['tolerance_w_top'] = coils.Width + coils.tolerance_w
     coils['dummy'] = False
 
     # Add additional rows to dummy_coils pandas dataframe
     # tolerance_h, h_min, h_max
-    dummy_coils['tolerance_h'] = tolerance_h_per/100*dummy_coils.Hight
-    dummy_coils['tolerance_h_bottom'] = dummy_coils.Hight-dummy_coils.tolerance_h # ToDo: negative = 0 setzen
-    dummy_coils['tolerance_h_top'] = dummy_coils.Hight+dummy_coils.tolerance_h
+    dummy_coils['tolerance_h'] = tolerance_h_per / 100 * dummy_coils.Hight
+    dummy_coils['tolerance_h_bottom'] = dummy_coils.Hight - dummy_coils.tolerance_h
+    dummy_coils['tolerance_h_top'] = dummy_coils.Hight + dummy_coils.tolerance_h
     # tolerance_w, w_min, w_max
     dummy_coils['tolerance_w'] = tolerance_w_abs
-    dummy_coils['tolerance_w_bottom'] = dummy_coils.Width-dummy_coils.tolerance_w # ToDo: negative = 0 setzen
-    dummy_coils['tolerance_w_top'] = dummy_coils.Width+dummy_coils.tolerance_w
+    dummy_coils['tolerance_w_bottom'] = dummy_coils.Width - dummy_coils.tolerance_w
+    dummy_coils['tolerance_w_top'] = dummy_coils.Width + dummy_coils.tolerance_w
     dummy_coils['dummy'] = True
 
     complete_coils = coils.iloc[[0]]
-    for n in range(len(coils)-1):
+    for n in range(len(coils) - 1):
         # Nächstes coil liegt im Toleranzbereich:
-        if (coils.tolerance_h_top[n] >= coils.Hight[n+1] >= coils.tolerance_h_bottom[n]) and (
-                coils.tolerance_w_top[n] >= coils.Width[n+1] >= coils.tolerance_w_bottom[n]):
-            complete_coils = complete_coils.append(coils.iloc[n+1], ignore_index=True)
+        if (coils.tolerance_h_top[n] >= coils.Hight[n + 1] >= coils.tolerance_h_bottom[n]) and (
+                coils.tolerance_w_top[n] >= coils.Width[n + 1] >= coils.tolerance_w_bottom[n]):
+            complete_coils = complete_coils.append(coils.iloc[n + 1], ignore_index=True)
         # Nächstes Coil liegt nicht im Toleranzbereich: Dummycoil(s) notwendig
         else:
-            dummy_coils_selection = get_dummy_coils(coils.iloc[[n]],coils.iloc[[n+1]], dummy_coils)
-            if not isinstance(dummy_coils_selection, pd.DataFrame):
+            try:
+                dummy_coils_selection = get_dummy_coils(coils.iloc[[n]], coils.iloc[[n + 1]], dummy_coils)
+            except RecursionError as re:
                 return -1
             complete_coils = complete_coils.append(dummy_coils_selection)
-            complete_coils = complete_coils.append(coils.iloc[n+1], ignore_index=True)
+            complete_coils = complete_coils.append(coils.iloc[n + 1], ignore_index=True)
 
     # Clean not needed parameters from pandas dataframe
     complete_coils = complete_coils[['RecordID', 'Hight', 'Width', 'dummy']]
@@ -193,71 +197,73 @@ def get_complete_coil_list(coils, dummy_coils, tolerance_h_per, tolerance_w_abs)
 def get_dummy_coils(coil1, coil2, dummy_coils):
     """
     This function searches for needed dummy_coils to be able to fuse coil1 with coil2.
-    :param coil1:
-    :param coil2:
-    :param dummy_coils:
-    :return:
+    :param coil1: Pandas dataframe of the first (start) coil
+    :param coil2: Pandas dataframe of the second (end) coil
+    :param dummy_coils: List of available dummy coils
+    :return: List of needed dummy coil(s) to fuse coil 1 with coil 2
     """
 
     dummy_coils_rslt = dummy_coils
     # Check hight:
     # Hight von coil2 im Toleranzbereich von coil1
     if (coil1.tolerance_h_top.iloc[0] >= coil2.Hight.iloc[0] >= coil1.tolerance_h_bottom.iloc[0]):
-        dummy_coils_rslt = dummy_coils_rslt[(coil1.tolerance_h_top.iloc[0] >= dummy_coils_rslt['Hight']) & (dummy_coils_rslt['Hight'] >= coil1.tolerance_h_bottom.iloc[0])]
-        dummy_coils_rslt = dummy_coils_rslt[(dummy_coils_rslt['tolerance_h_top'] >= coil2.Hight.iloc[0]) & (coil2.Hight.iloc[0] >= dummy_coils_rslt['tolerance_h_bottom'])]
+        dummy_coils_rslt = dummy_coils_rslt[(coil1.tolerance_h_top.iloc[0] >= dummy_coils_rslt['Hight']) & (
+                    dummy_coils_rslt['Hight'] >= coil1.tolerance_h_bottom.iloc[0])]
+        dummy_coils_rslt = dummy_coils_rslt[(dummy_coils_rslt['tolerance_h_top'] >= coil2.Hight.iloc[0]) & (
+                    coil2.Hight.iloc[0] >= dummy_coils_rslt['tolerance_h_bottom'])]
     # Hight von coil2 außerhalb Toleranzbereich von coil1
     else:
         if coil1.Hight.iloc[0] > coil2.Hight.iloc[0]:
             dummy_coils_rslt = dummy_coils_rslt[dummy_coils_rslt['Hight'] >= coil1.tolerance_h_bottom.iloc[0]]
             # Sortieren und somit dummy_coil auswählen was am nähsten an Toleranzgrenze liegt
-            #dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Hight'])
-        else: # coil1.Hight.iloc[0] < coil2.Hight.iloc[0]:
+            # dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Hight'])
+        else:  # coil1.Hight.iloc[0] < coil2.Hight.iloc[0]:
             dummy_coils_rslt = dummy_coils_rslt[dummy_coils_rslt['Hight'] <= coil1.tolerance_h_top.iloc[0]]
             # Sortieren und somit dummy_coil auswählen was am nähsten an Toleranzgrenze liegt
-            #dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Hight'], ascending=False)
+            # dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Hight'], ascending=False)
 
     # Check width:
     # Width von coil2 im Toleranzbereich von coil1
     if (coil1.tolerance_w_top.iloc[0] >= coil2.Width.iloc[0] >= coil1.tolerance_w_bottom.iloc[0]):
-        dummy_coils_rslt = dummy_coils_rslt[(coil1.tolerance_w_top.iloc[0] >= dummy_coils_rslt['Width']) & (dummy_coils_rslt['Width'] >= coil1.tolerance_w_bottom.iloc[0])]
-        dummy_coils_rslt = dummy_coils_rslt[(dummy_coils_rslt['tolerance_w_top'] >= coil2.Width.iloc[0]) & (coil2.Width.iloc[0] >= dummy_coils_rslt['tolerance_w_bottom'])]
+        dummy_coils_rslt = dummy_coils_rslt[(coil1.tolerance_w_top.iloc[0] >= dummy_coils_rslt['Width']) & (
+                    dummy_coils_rslt['Width'] >= coil1.tolerance_w_bottom.iloc[0])]
+        dummy_coils_rslt = dummy_coils_rslt[(dummy_coils_rslt['tolerance_w_top'] >= coil2.Width.iloc[0]) & (
+                    coil2.Width.iloc[0] >= dummy_coils_rslt['tolerance_w_bottom'])]
     # Width von coil2 außerhalb Toleranzbereich von coil1
     else:
         if coil1.Width.iloc[0] > coil2.Width.iloc[0]:
             dummy_coils_rslt = dummy_coils_rslt[dummy_coils_rslt['Width'] >= coil1.tolerance_w_bottom.iloc[0]]
-            # Sortieren und somit dummy_coil auswählen was am nähsten an Toleranzgrenze liegt
-            #dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Width'])
         else:  # coil1.Width.iloc[0] < coil2.Width.iloc[0]:
             dummy_coils_rslt = dummy_coils_rslt[dummy_coils_rslt['Width'] <= coil1.tolerance_w_top.iloc[0]]
-            # Sortieren und somit dummy_coil auswählen was am nähsten an Toleranzgrenze liegt
-            #dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Width'], ascending=False)
 
     # Sortieren: Dummy-Coils auswählen die am nächsten an Toleranzgrenze liegen
     if coil1.Hight.iloc[0] > coil2.Hight.iloc[0]:
         if coil1.Width.iloc[0] > coil2.Width.iloc[0]:
-            dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Hight','Width'], ascending=[True, True], ignore_index=True)
+            dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Hight', 'Width'], ascending=[True, True],
+                                                            ignore_index=True)
         else:
-            dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Hight','Width'], ascending=[True, False], ignore_index=True)
+            dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Hight', 'Width'], ascending=[True, False],
+                                                            ignore_index=True)
     else:
         if coil1.Width.iloc[0] > coil2.Width.iloc[0]:
-            dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Hight','Width'], ascending =[False, True], ignore_index=True)
+            dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Hight', 'Width'], ascending=[False, True],
+                                                            ignore_index=True)
         else:
-            dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Hight','Width'], ascending =[False, False], ignore_index=True)
+            dummy_coils_rslt = dummy_coils_rslt.sort_values(by=['Hight', 'Width'], ascending=[False, False],
+                                                            ignore_index=True)
 
     # Wähle erstes Dummy-Coil (alle Coils aus Liste passen, aber das erste stellt das sinnvollste Coil dar)
     dummy_coils_rslt = dummy_coils_rslt.iloc[[0]]
-    # Neues Dummycoil entspricht dem vorherigen Dummycoil -> Keine passenden Dummycoils zur Überbrückung vorhanden
-    if coil1.Hight.iloc[0] == dummy_coils_rslt.Hight.iloc[0] & coil1.Hight.iloc[0] == dummy_coils_rslt.Hight.iloc[0] & coil1.dummy.iloc[0] == True:
-            return -1
+
     # Coil2 (End-Coil) im Toleranzbereich vom Dummy-Coil
-    if (dummy_coils_rslt.tolerance_h_top.iloc[0] >= coil2.Hight.iloc[0] >= dummy_coils_rslt.tolerance_h_bottom.iloc[0]) and (dummy_coils_rslt.tolerance_w_top.iloc[0] >= coil2.Width.iloc[0] >= dummy_coils_rslt.tolerance_w_bottom.iloc[0]):
+    if (dummy_coils_rslt.tolerance_h_top.iloc[0] >= coil2.Hight.iloc[0] >= dummy_coils_rslt.tolerance_h_bottom.iloc[
+        0]) and (
+            dummy_coils_rslt.tolerance_w_top.iloc[0] >= coil2.Width.iloc[0] >= dummy_coils_rslt.tolerance_w_bottom.iloc[
+        0]):
         return dummy_coils_rslt
     # Coil2 (End-Coil) noch immer nicht im Toleranzbereiche vom ausgewählten Dummy-Coil
     else:
-        dummy_next = get_dummy_coils(dummy_coils_rslt, coil2, dummy_coils)
-        if not isinstance(dummy_next, pd.DataFrame):
-            return -1
-        else:
-            dummy_coils_rslt = dummy_coils_rslt.append(dummy_next, ignore_index=True)
+        dummy_coils_rslt = dummy_coils_rslt.append(get_dummy_coils(dummy_coils_rslt, coil2, dummy_coils),
+                                                   ignore_index=True)
 
     return dummy_coils_rslt
