@@ -114,7 +114,6 @@ def generate_path(coils, dummy_coils, tolerance_h_per, tolerance_w_abs):
     :param tolerance_w_abs:
     :return:
     """
-    # ToDo: Raise Error when it's not possible to create a fusible path with one of the algorithms
 
     # Path Option 1:
     #   - Sort coil list based on hight + width
