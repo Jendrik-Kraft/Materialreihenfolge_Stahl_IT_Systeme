@@ -172,8 +172,8 @@
     </section>
 
     <script>
-      var xAchse_Name = "Dicke";
-      var yAchse_Name = "Breite";
+      var xAchse_Name = "Dicke in mm";
+      var yAchse_Name = "Breite in mm";
       var coils = {{ coils|safe }} ;// Laden aus der Python Datei
       //var dummy = {{ dummy_coils|safe }} // Laden aus der Python Datei
       var connections = {{ connections|safe }} ;// Laden aus der Python Datei
@@ -191,8 +191,8 @@
         connections_reverse = connections_reverse.replaceAll("a","y");
         connections = JSON.parse(connections_reverse);
 
-        xAchse_Name="Breite";
-        yAchse_Name="Dicke";
+        xAchse_Name="Breite in mm";
+        yAchse_Name="Dicke in mm";
       }
       new Chart("myChart", {
         data: {
