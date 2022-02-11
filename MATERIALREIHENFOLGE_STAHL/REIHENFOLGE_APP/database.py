@@ -48,3 +48,27 @@ def get_coils_from_database():
         print("Error in Connection")
 
     return [coils, dummy_coils]
+
+def add_coils_to_database (add_coils_df):
+    """
+    This function is used to add data (coils) to the MS Access databse
+    :param add_coils_df: dataframe containing hight and width of the coils to be added in mm
+    :return:
+    """
+    # Establish Database Connection in MS Access
+    # CoilsDatabase includes default data and dummy coils
+    try:
+        con_string = r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=.\CoilsDatabase.accdb;'
+        conn = pyodbc.connect(con_string)
+        cursor = conn.cursor()
+        cursor.executemany('INSERT INTO Coils_default VALUES (?,?)', add_coils_df)
+        conn.commit()
+        print('data inserted')
+
+
+    except pyodbc.Error as e:
+        print("Error in Connection", e)
+
+    # add data to database:
+
+    return []
