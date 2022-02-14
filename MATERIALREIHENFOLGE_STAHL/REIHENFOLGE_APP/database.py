@@ -50,3 +50,50 @@ def get_coils_from_database():
         dummy_coils = None
 
     return [coils, dummy_coils]
+
+def add_coils_to_database (add_coils_df):
+    """
+    This function is used to add data (coils) to the MS Access databse
+    :param add_coils: tuple containing Record ID, hight and width of the coils to be added (in mm)
+    :return: tbd
+    """
+    # Establish Database Connection in MS Access
+    # CoilsDatabase includes default data and dummy coils
+    try:
+        con_string = r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=.\CoilsDatabase.accdb;'
+        conn = pyodbc.connect(con_string)
+        cursor = conn.cursor()
+        # several new coils at a time
+        cursor.executemany('INSERT INTO Coils_default VALUES (?)', add_coils)
+        # only one new coil at a time?
+        # cursor.execute('INSERT INTO Coils_default VALUES (?)', add_coils)
+        conn.commit()
+        print('data inserted')
+
+
+    except pyodbc.Error as e:
+        print("Error in Connection", e)
+
+    # add data to database:
+
+    return []
+
+def delete_coils_from_database (id):
+    """
+    This function is used to delete data (coils) from the MS Access databse based on their ID
+    :param id: ID of coil that should be deleted
+    :return: tbd
+    """
+    try:
+        con_string = r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=.\CoilsDatabase.accdb;'
+        conn = pyodbc.connect(con_string)
+        cursor = conn.cursor()
+        cursor.execute('DELETE FROM Coils_default WHERE RecordID = ?', (id))
+        conn.commit()
+        print("Data Deleted ")
+
+
+    except pyodbc.Error as e:
+        print("Error in connection", e)
+
+    return []
