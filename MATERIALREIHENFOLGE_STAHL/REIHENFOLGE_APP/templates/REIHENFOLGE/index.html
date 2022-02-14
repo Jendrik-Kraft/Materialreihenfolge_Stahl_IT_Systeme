@@ -190,11 +190,17 @@
       var xAchse_Name = "Dicke in mm";
       var yAchse_Name = "Breite in mm";
       var coils = {{ coils|safe }} ;// Laden aus der Python Datei
-      var dummy_coils = {{ dummy_coils|safe }} ;// Laden aus der Python Datei
+      //var dummy_coils = {{ dummy_coils|safe }} ;// Laden aus der Python Datei
+      var dummy_coils = [];
       var connections = {{ connections|safe }} ;// Laden aus der Python Datei
 
       if(localStorage.getItem("DummyText")=="Zeige Dummycoils an"){
         dummy_coils=[];
+      }
+      if(localStorage.getItem("buttonText")=="Zeige besten Pfad"){
+        document.getElementById("show_dummys").removeAttribute("disabled");
+      }else{
+        document.getElementById("show_dummys").setAttribute("disabled", "disabled");
       }
       if(localStorage.getItem("tauschen")==1){
         var coils_string=JSON.stringify(coils);
