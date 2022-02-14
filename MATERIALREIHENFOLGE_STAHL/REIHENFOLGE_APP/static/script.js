@@ -12,11 +12,26 @@ if (!firstTime) {
 } else if (firstTime == 1) {
   var tol_breite = localStorage.getItem("Breite");
   var tol_dicke = localStorage.getItem("Dicke");
-  location.href =
-    "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
+  reload();
   localStorage.setItem("first_time", "2");
 } else if (firstTime == 2) {
   localStorage.setItem("first_time", "1");
+}
+
+function reload() {
+  var tol_breite = localStorage.getItem("Breite");
+  var tol_dicke = localStorage.getItem("Dicke");
+  if (localStorage.getItem("buttonText") == "Zeige alle Pfade") {
+    location.href =
+      "http://127.0.0.1:8000/display_graph/" +
+      tol_breite +
+      "/" +
+      tol_dicke +
+      "/best_path";
+  } else {
+    location.href =
+      "http://127.0.0.1:8000/display_graph/" + tol_breite + "/" + tol_dicke;
+  }
 }
 
 function updateToleranz() {
@@ -32,11 +47,7 @@ function updateToleranz() {
   ) {
     localStorage.setItem("Breite", tol_breite.value);
     localStorage.setItem("Dicke", tol_dicke.value);
-    location.href =
-      "http://127.0.0.1:8000/display_graph/" +
-      tol_breite.value +
-      "/" +
-      tol_dicke.value;
+    reload();
   } else {
     localStorage.setItem("Breite", 0);
     localStorage.setItem("Dicke", 0);
@@ -53,9 +64,6 @@ function updateToleranz() {
 function showPath() {
   var currentText = document.getElementById("show_path").value;
   var newText = " ";
-  var tolBreite = localStorage.getItem("Breite");
-  var tolDicke = localStorage.getItem("Dicke");
-
   // Change Button Text
   if (currentText == "Zeige besten Pfad") {
     //path = "/bestpath";
@@ -63,19 +71,13 @@ function showPath() {
     localStorage.setItem("buttonText", newText);
     //document.getElementById("show_path").value = newText;
     //location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/bestpath";
-    location.href =
-      "http://127.0.0.1:8000/display_graph/" +
-      tolBreite +
-      "/" +
-      tolDicke +
-      "/best_path";
+    reload();
   } else if (currentText == "Zeige alle Pfade") {
     path = "";
     newText = "Zeige besten Pfad";
     //document.getElementById("show_path").value = newText;
     localStorage.setItem("buttonText", newText);
-    location.href =
-      "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke;
+    reload();
   }
 }
 
@@ -86,11 +88,7 @@ function onChangeAxisButtonClick() {
   } else {
     localStorage.setItem("tauschen", 0);
   }
-  location.href =
-    "http://127.0.0.1:8000/display_graph/" +
-    localStorage.getItem("Breite") +
-    "/" +
-    localStorage.getItem("Dicke");
+  reload();
 }
 
 function showDummys() {
@@ -103,11 +101,7 @@ function showDummys() {
     newText = "Zeige Dummycoils an";
     localStorage.setItem("DummyText", newText);
   }
-  location.href =
-    "http://127.0.0.1:8000/display_graph/" +
-    localStorage.getItem("Breite") +
-    "/" +
-    localStorage.getItem("Dicke");
+  reload();
 }
 
 function onChangeToEditPageButtonClick() {
