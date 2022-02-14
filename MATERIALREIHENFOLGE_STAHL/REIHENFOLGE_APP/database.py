@@ -16,7 +16,7 @@ def get_coils_from_database():
     # Establish Database Connection in MS Access
     # CoilsDatabase includes default data and dummy coils
     try:
-        con_string = r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=.\CoilsDatabase.accdb;'
+        con_string = r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=REIHENFOLGE_APP\CoilsDatabase.accdb;'
         conn = pyodbc.connect(con_string)
         print("Connected To Database")
 
