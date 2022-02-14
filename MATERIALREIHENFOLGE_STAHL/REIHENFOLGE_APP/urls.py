@@ -17,7 +17,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.hi, name="home-page"),
-    path('display_graph/<int:dicke>/<int:breite>/<str:pfade>', views.hi, name="home-page"),
-    path('display_graph/<int:dicke>/<int:breite>', views.hi, name="home-page"),
+    path('', views.load_page, name="home-page"),
+    path('display_graph/<int:dicke>/<int:breite>/<str:pfade>', views.load_page, name="home-page"),
+    path('display_graph/<int:dicke>/<int:breite>', views.load_page, name="home-page"),
 ]
