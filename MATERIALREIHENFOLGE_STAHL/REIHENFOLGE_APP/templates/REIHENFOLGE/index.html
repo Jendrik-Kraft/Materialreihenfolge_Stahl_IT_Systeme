@@ -134,6 +134,21 @@
                 type="button"
                 style="width: 255px"
                 class="button addBtn"
+                id="show_dummys"
+                onclick="showDummys()"
+                value="Zeige Dummycoils an"
+              />
+              <!--onclick = Funktion ausführen-->
+              <!--Zeige Dummycoils-->
+              <!--</button>-->
+            </div>
+          </div>
+          <div class="center">
+            <div class="column">
+              <input
+                type="button"
+                style="width: 255px"
+                class="button addBtn"
                 id="show_path"
                 onclick="showPath()"
                 value="Zeige besten Pfad"
@@ -175,8 +190,12 @@
       var xAchse_Name = "Dicke in mm";
       var yAchse_Name = "Breite in mm";
       var coils = {{ coils|safe }} ;// Laden aus der Python Datei
-      //var dummy = {{ dummy_coils|safe }} // Laden aus der Python Datei
+      var dummy_coils = {{ dummy_coils|safe }} ;// Laden aus der Python Datei
       var connections = {{ connections|safe }} ;// Laden aus der Python Datei
+
+      if(localStorage.getItem("DummyText")=="Zeige Dummycoils an"){
+        dummy_coils=[];
+      }
       if(localStorage.getItem("tauschen")==1){
         var coils_string=JSON.stringify(coils);
         var coils_reverse = coils_string.replaceAll("x","a");
@@ -203,7 +222,12 @@
               pointBackgroundColor: "rgb(0,0,255)",
               data: coils,
             },
-
+            {
+              type: "scatter",
+              pointRadius: 4,
+              pointBackgroundColor: "rgb(255,0,0)",
+              data: dummy_coils,
+            },
             {
               type: "line",
               backgroundColor: "rgba(0,0,0,1.0)",
@@ -274,6 +298,7 @@
       });
       // Änderung der Button - Beschriftung für show_path
       document.getElementById("show_path").value = localStorage.getItem("buttonText");
+      document.getElementById("show_dummys").value = localStorage.getItem("DummyText");
     </script>
   </body>
 </html>

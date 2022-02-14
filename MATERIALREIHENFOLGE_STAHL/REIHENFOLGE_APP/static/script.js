@@ -7,6 +7,7 @@ if (!firstTime) {
   localStorage.setItem("Breite", "0");
   localStorage.setItem("Dicke", "0");
   localStorage.setItem("buttonText", "Zeige besten Pfad");
+  localStorage.setItem("DummyText", "Zeige Dummycoils an");
   localStorage.setItem("tauschen", 0);
 } else if (firstTime == 1) {
   var tol_breite = localStorage.getItem("Breite");
@@ -84,6 +85,26 @@ function onChangeAxisButtonClick() {
     localStorage.setItem("tauschen", 1);
   } else {
     localStorage.setItem("tauschen", 0);
+  }
+  location.href =
+    "http://127.0.0.1:8000/display_graph/" +
+    localStorage.getItem("Breite") +
+    "/" +
+    localStorage.getItem("Dicke");
+}
+
+function showDummys() {
+  var currentText = document.getElementById("show_dummys").value;
+  var newText = "";
+  if (currentText == "Zeige Dummycoils an") {
+    newText = "Blende Dummycoils aus";
+    localStorage.setItem("DummyText", newText);
+
+
+  } else {
+    newText = "Zeige Dummycoils an";
+    localStorage.setItem("DummyText", newText);
+
   }
   location.href =
     "http://127.0.0.1:8000/display_graph/" +
