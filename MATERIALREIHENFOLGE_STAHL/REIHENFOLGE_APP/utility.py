@@ -1,4 +1,5 @@
 import json
+import pandas as pd
 
 
 def find_fusible_coils(coils, tolerance_h_per, tolerance_w_abs):
