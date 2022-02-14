@@ -99,12 +99,9 @@ function showDummys() {
   if (currentText == "Zeige Dummycoils an") {
     newText = "Blende Dummycoils aus";
     localStorage.setItem("DummyText", newText);
-
-
   } else {
     newText = "Zeige Dummycoils an";
     localStorage.setItem("DummyText", newText);
-
   }
   location.href =
     "http://127.0.0.1:8000/display_graph/" +
