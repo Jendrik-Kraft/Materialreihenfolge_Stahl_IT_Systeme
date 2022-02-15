@@ -30,8 +30,9 @@ def mainpage(request, dicke=0, breite=0, pfade="all"):
                                                       "dummy_coils": dummy_coils_for_js})
 
 
-def editpage(request):
+def editpage(request, table=""):
     [coils, dummy_coils] = get_coils_from_database()
     coils = round(coils, 2)
+    table = table;
     coil_list_for_js = build_coil_list_for_js(coils)
     return render(request, 'REIHENFOLGE/editPage.html', {"coils": coils.values.tolist()})
