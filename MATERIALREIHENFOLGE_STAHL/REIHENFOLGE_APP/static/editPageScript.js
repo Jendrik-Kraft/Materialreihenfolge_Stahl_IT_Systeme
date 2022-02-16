@@ -5,6 +5,23 @@ function onChangeToMainPageButtonClick() {
     "http://127.0.0.1:8000/display_graph/10/10";
 }
 
+function onAddButtonClick(){
+          var new_dicke = document.getElementById("input_dicke").value;
+          var new_breite = document.getElementById("input_breite").value;
+          const coilsTable = document.querySelector('.coilsTable'); // Find the table we created
+          let coilsTableBodyRow = document.createElement('tr'); // Create the current table row
+          coilsTableBodyRow.className = 'coilsTableBodyRow';
+          // Lines 72-85 create the 3 column cells that will be appended to the current table row
+          let coilID = document.createElement('td');
+          coilID.innerText = coilsTable.rows.length;
+          let coilWidth = document.createElement('td');
+          coilWidth.innerText = new_breite;
+          let coilHight = document.createElement('td');
+          coilHight.innerText = new_dicke;
+          coilsTableBodyRow.append(coilID, coilWidth, coilHight);// Append all 5 cells to the table row
+          coilsTable.append(coilsTableBodyRow);// Append the current row to the scoreboard table body
+}
+
 function onSaveChangesButtonClick() {
     //var coilsTableData = document.querySelector("tbody.coilsTable-Body");
     //var tableId = document.getElementById('coilsTable').value;
@@ -51,11 +68,11 @@ function onSaveChangesButtonClick() {
 function buildTable() {
       var coilDiv = document.querySelector("div.coilTable"); // Find the scoreboard div in our html
       //scoreDiv.style.background = "green";
-      var tableHeaders = ["ID","Width", "Height"];
+      var tableHeaders = ["ID","Breite", "Dicke"];
       const createCoilTable = () =>
       {
           while (coilDiv.firstChild){ coilDiv.removeChild(coilDiv.firstChild); }// Remove all children from scoreboard div (if any)
-          let coilsTable = document.createElement('table'); // Create the table itself
+          var coilsTable = document.createElement('table'); // Create the table itself
           coilsTable.className = 'coilsTable';
           let coilsTableHead = document.createElement('thead') ;// Creates the table header group element
           coilsTableHead.className = 'coilsTableHead';
@@ -92,11 +109,7 @@ function buildTable() {
       //var coils = {{ coils|safe }} ;
       //var coils=coils;
       createCoilTable();// Clears scoreboard div if it has any children nodes, creates & appends the table
-      coilDiv.setAttribute("contenteditable", true);
-      var coilsTableHead = document.querySelector("thead.coilsTableHead");
-      coilsTableHead.setAttribute("contenteditable", false);
       // Iterates through all the objects in the scores array and appends each one to the table body
-
       for (const coil of coils) {
           var coilIndex = coils.indexOf(coil) + 1;// Index of score in score array for global ranking (these are already sorted in the back-end)
           appendCoils(coil); // Creates and appends each row to the table body

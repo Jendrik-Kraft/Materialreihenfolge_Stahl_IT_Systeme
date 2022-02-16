@@ -53,9 +53,37 @@
         <div class="container notification has-background-grey-light">
           <!-- columns: https://bulma.io/documentation/columns/basics/ -->
           <div class="coilTable">
-
           </div>
 
+          <div class="center">
+            <div class="column">
+              <input
+                    class="input is-medium"
+                    type="number"
+                    style="width: 255px; height: 40px;"
+                    min="1"
+                    max="1000"
+                    id="input_breite"
+                    placeholder="Breite [mm]"
+                  />
+              <input
+                    class="input is-medium"
+                    type="number"
+                    style="width: 255px; height: 40px;"
+                    min="1"
+                    max="5"
+                    id="input_dicke"
+                    placeholder="Dicke [mm]"
+                  />
+              <button
+                class="button addBtn"
+                style="width: 255px;"
+                id="addCoil_Btn"
+                onclick="onAddButtonClick()">
+                Coil hinzufügen
+              </button>
+            </div>
+          </div>
           <div class="center">
             <div class="column">
               <button
@@ -72,8 +100,7 @@
                 onclick="onSaveChangesButtonClick()">
                 Änderungen speichern
               </button>
-            </div>
-
+              </div>
           </div>
         </div>
       </div>
