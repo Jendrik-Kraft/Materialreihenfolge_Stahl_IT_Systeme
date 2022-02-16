@@ -16,29 +16,27 @@ function updateToleranz() {
   var tol_breite = document.getElementById("input_breite");
   //if((typeof(tol_dicke) != 'undefined' && tol_dicke != null && tol_dicke != "") || (typeof(tol_breite) != 'undefined' && tol_breite != null && tol_breite != "")){
 
-  if (
-    tol_dicke != null &&
-    tol_dicke.value != "" &&
-    tol_breite != null &&
-    tol_breite.value != ""
-  ) {
+  if ( tol_dicke != null && tol_dicke.value != "" && tol_breite != null && tol_breite.value != "" ) {
     localStorage.setItem("Breite", tol_breite.value);
     localStorage.setItem("Dicke", tol_dicke.value);
-    location.href =
-      "http://127.0.0.1:8000/display_graph/" +
-      tol_breite.value +
-      "/" +
-      tol_dicke.value;
-  } else {
+    
+    if (localStorage.getItem("buttonText") == "Zeige besten Pfad"){
+      location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/best_path";
+    }    
+    else {    
+      location.href = "http://127.0.0.1:8000/display_graph/" + tol_breite.value + "/" + tol_dicke.value;
+    }
+  } 
+  else {
     localStorage.setItem("Breite", 0);
     localStorage.setItem("Dicke", 0);
     tol_dicke.setCustomValidity("");
     tol_breite.setCustomValidity("");
     if(tol_dicke.value == ""){
-    tol_dicke.setCustomValidity("Invalid field.");
+      tol_dicke.setCustomValidity("Invalid field.");
     }
     if(tol_breite.value == ""){
-    tol_breite.setCustomValidity("Invalid field.");
+      tol_breite.setCustomValidity("Invalid field.");
     }
   }
 }
