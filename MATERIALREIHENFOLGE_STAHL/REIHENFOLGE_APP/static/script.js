@@ -20,7 +20,7 @@ function updateToleranz() {
     localStorage.setItem("Breite", tol_breite.value);
     localStorage.setItem("Dicke", tol_dicke.value);
     
-    if (localStorage.getItem("buttonText") == "Zeige besten Pfad"){
+    if (localStorage.getItem("buttonText") == "Zeige alle Pfade"){
       location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/best_path";
     }    
     else {    
