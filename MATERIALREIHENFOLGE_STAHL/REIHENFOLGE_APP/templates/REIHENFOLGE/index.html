@@ -147,6 +147,14 @@
         </div>
       </div>
     </section>
+    <section class="section">
+		  <center>
+			  <h1
+				  id= "nopath" 
+				  style="width: 255px; color:#D00000; font-size:300%; font-family:verdana;"
+			  ></h1> 
+		  </center>
+	  </section>
 
     <script>
       var xAchse_Name = "Dicke";
@@ -154,6 +162,17 @@
       var coils = {{ coils|safe }} ;// Laden aus der Python Datei
       var dummy = {{ dummy_coils|safe }} // Laden aus der Python Datei
       var connections = {{ connections|safe }} ;// Laden aus der Python Datei
+      var noPath = {{ error|safe }}; //load error variable from Python (1 = noPath; 0 = path available)
+      
+      if(noPath == 1){
+        var warning = document.getElementById("nopath");
+        warning.innerHTML = "Warning: No Paths Available";
+      }
+      else {
+        var warning = document.getElementById("nopath");
+        warning.innerHTML = " ";
+      }
+      
       new Chart("myChart", {
         data: {
           datasets: [
