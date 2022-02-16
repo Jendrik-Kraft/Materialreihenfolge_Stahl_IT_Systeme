@@ -182,6 +182,14 @@
               </button>
             </div>
           </div>
+          <div class="center">
+            <div class="column">
+              <p
+                id="nopath"
+                style="color: #d00000; font-size: 150%; font-family: verdana"
+              ></p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -193,6 +201,7 @@
       var dummy_coils = {{ dummy_coils|safe }} ;// Laden aus der Python Datei
       //var dummy_coils = [{x: 2, y: 600}]; // Test Values für die Dummy Coils
       var connections = {{ connections|safe }} ;// Laden aus der Python Datei
+      var error = {{ error|safe }} ; //Lade Error Status
 
       if(localStorage.getItem("DummyText")=="Zeige Dummycoils an" && localStorage.getItem("buttonText")=="Zeige besten Pfad"){
         dummy_coils=[];
@@ -210,6 +219,12 @@
         coils_reverse = coils_reverse.replaceAll("a","y");
         coils = JSON.parse(coils_reverse);
 
+        var dummy_string=JSON.stringify(dummy_coils);
+        var dummy_reverse = dummy_string.replaceAll("x","a");
+        dummy_reverse = dummy_reverse.replaceAll("y","x");
+        dummy_reverse = dummy_reverse.replaceAll("a","y");
+        dummy_coils = JSON.parse(dummy_reverse);
+
 
         var connections_string=JSON.stringify(connections);
         var connections_reverse = connections_string.replaceAll("x","a");
@@ -220,6 +235,14 @@
         xAchse_Name="Breite in mm";
         yAchse_Name="Dicke in mm";
       }
+
+      if(error == 1){
+        document.getElementById("nopath").innerHTML = "Achtung: Kein bester Pfad für diese Toleranzen verfügbar..";
+      }
+      else {
+        document.getElementById("nopath").innerHTML = " ";
+      }
+
       new Chart("myChart", {
         data: {
           datasets: [

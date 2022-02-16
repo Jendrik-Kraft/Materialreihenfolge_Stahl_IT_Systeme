@@ -4,8 +4,8 @@ var firstTime = localStorage.getItem("first_time");
 if (!firstTime) {
   // first time loaded!
   localStorage.setItem("first_time", "1");
-  localStorage.setItem("Breite", "0");
-  localStorage.setItem("Dicke", "0");
+  localStorage.setItem("Breite", "1");
+  localStorage.setItem("Dicke", "1");
   localStorage.setItem("buttonText", "Zeige besten Pfad");
   localStorage.setItem("DummyText", "Zeige Dummycoils an");
   localStorage.setItem("tauschen", 0);
