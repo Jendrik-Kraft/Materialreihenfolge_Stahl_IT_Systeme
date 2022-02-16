@@ -27,6 +27,9 @@ def mainpage(request, dicke=0, breite=0, pfade="all"):
             #fitting_coils = find_fusible_coils(coils, breite, dicke)
             dummy_coils_for_js = build_dummy_coil_list_for_js(complete_coils)
             fitting_coils_for_js = build_path_for_js(complete_coils)
+    else:
+        fitting_coils = find_fusible_coils(coils, 0, 0)
+        fitting_coils_for_js = build_fitting_coils_list_for_js(coils, fitting_coils)
     coil_list_for_js = build_coil_list_for_js(coils)
     return render(request, 'REIHENFOLGE/index.html', {"coils": coil_list_for_js, "connections": fitting_coils_for_js,
                                                       "dummy_coils": dummy_coils_for_js})  # "error": error
