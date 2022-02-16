@@ -187,14 +187,13 @@
     </section>
     
     <section class="section">
-		  <center>
-			  <h1
-				  id= "nopath" 
-				  style="width: 255px; color:#D00000; font-size:300%; font-family:verdana;"
-			  ></h1> 
-
-		  </center>
-	  </section>
+      <center>
+        <p
+	   id= "nopath" 
+	   style="width: 255px; color:#D00000; font-size:300%; font-family:verdana;"
+	></p1> 
+      </center>
+    </section>
 
     <script>
       var xAchse_Name = "Dicke in mm";
@@ -234,12 +233,10 @@
       }
       
       if(localStorage.getItem("error") == 1){
-        var warning = document.getElementById("nopath");
-        warning.innerHTML = "Warning: No Paths Available";
+        document.getElementById("nopath").innerHTML = "Warning: No Paths Available";
       }
       else {
-        var warning = document.getElementById("nopath");
-        warning.innerHTML = " ";
+        document.getElementById("nopath").innerHTML = "Warning: No Paths Available";
       }
       
       new Chart("myChart", {
