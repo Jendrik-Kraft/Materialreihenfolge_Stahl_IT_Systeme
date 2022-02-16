@@ -182,19 +182,18 @@
               </button>
             </div>
           </div>
+	  <div class="center">
+            <div class="column">
+              <p
+	        id= "nopath" 
+	        style="color:#D00000; font-size:300%; font-family:verdana;"
+	      ></p> 
+            </div>
+          </div>
         </div>
       </div>
     </section>
     
-    <section class="section">
-      <center>
-        <p
-	   id= "nopath" 
-	   style="color:#D00000; font-size:300%; font-family:verdana;"
-	></p> 
-      </center>
-    </section>
-
     <script>
       var xAchse_Name = "Dicke in mm";
       var yAchse_Name = "Breite in mm";
@@ -233,7 +232,7 @@
       }
       
       if(localStorage.getItem("error") == 1){
-        document.getElementById("nopath").innerHTML = "Warning: No Paths Available";
+        document.getElementById("nopath").innerHTML = "Achtung: Kein bester Pfad für diese Toleranzen verfügbar..";
       }
       else {
         document.getElementById("nopath").innerHTML = "Warning: No Paths Available";
