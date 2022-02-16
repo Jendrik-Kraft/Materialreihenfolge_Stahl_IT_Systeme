@@ -1,13 +1,15 @@
 import django.template
 from django.shortcuts import render
-from .database_xlsx_old import *
+from .database import *
 from .utility import *
 
 # Create your views here.
-def load_page(request, dicke=0, breite=0, pfade="all"):
+def mainpage(request, dicke=0, breite=0, pfade="all"):
+    print(dicke)
+    print(breite)
     dummy_coils_for_js = []
     [coils, dummy_coils] = get_coils_from_database()
-
+    # error = 0
     if pfade == "all":
         fitting_coils = find_fusible_coils(coils, breite, dicke)
         fitting_coils_for_js = build_fitting_coils_list_for_js(coils, fitting_coils)
@@ -15,10 +17,11 @@ def load_page(request, dicke=0, breite=0, pfade="all"):
 
     # if both tolerances are 0, generate_path will error. Thus we only execute it if tolerances are given
     if pfade == "best_path" and (dicke != 0 or breite != 0):
-        complete_coils = generate_path(coils, dummy_coils, breite, dicke)
-        if type(complete_coils) is int:
+        complete_coils = generate_path(coils, dummy_coils, dicke, breite)
+        if type(complete_coils) is int:  # Rückgabe -1 -> es wurde kein Pfad gefunden
             fitting_coils = find_fusible_coils(coils, 0, 0)
             fitting_coils_for_js = build_fitting_coils_list_for_js(coils, fitting_coils)
+            #error = 1
             #dummy_coils_for_js = build_coil_list_for_js(dummy_coils)
         else:
             #fitting_coils = find_fusible_coils(coils, breite, dicke)
@@ -26,4 +29,18 @@ def load_page(request, dicke=0, breite=0, pfade="all"):
             fitting_coils_for_js = build_path_for_js(complete_coils)
     coil_list_for_js = build_coil_list_for_js(coils)
     return render(request, 'REIHENFOLGE/index.html', {"coils": coil_list_for_js, "connections": fitting_coils_for_js,
-                                                      "dummy_coils": dummy_coils_for_js})
+                                                      "dummy_coils": dummy_coils_for_js})  # "error": error
+
+
+def editpage(request, table=""):
+    [coils, dummy_coils] = get_coils_from_database()
+    coils = round(coils, 2)
+    if table:
+        mylist = table.split(";")
+        editedCoilArray = []
+        for element in mylist:
+            editedCoilArray.append(element.split(","))
+        if len(editedCoilArray) > 0:
+            del editedCoilArray[0]
+    coil_list_for_js = build_coil_list_for_js(coils)
+    return render(request, 'REIHENFOLGE/editPage.html', {"coils": coils.values.tolist()})

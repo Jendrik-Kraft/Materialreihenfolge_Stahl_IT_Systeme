@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <style>
+      .center {
+              text-align: center;
+              }
+      input:invalid { background: red; }
+      input:valid { background: white; }
+      table { width: 100%;
+      text-align: center;}
+      table, th, td {
+      border: 1px solid white;
+      border-collapse: collapse;
+      }
+      th, td {
+        background-color: grey-light;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stehling Stahl - Materialreihenfolge</title>
+    <link
+      rel="icon"
+      href="https://raw.githubusercontent.com/Jendrik-Kraft/Materialreihenfolge_Stahl_IT_Systeme/Icon/MATERIALREIHENFOLGE_STAHL/REIHENFOLGE_APP/templates/REIHENFOLGE/StealIcon.png"
+      type="image/x-icon"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    {% load static %}
+    <script type="text/javascript" src="{% static 'editPageScript.js' %}"></script>
+  </head>
+  <body onload="buildTable();">
+    <!-- hero: https://bulma.io/documentation/layout/hero/ -->
+    <section class="hero is-info">
+      <div class="hero-body">
+        <h1 class="title">Materialreihenfolge</h1>
+        <p class="subtitle">
+          Ihr Materialreihenfolge System powered by <strong>Team Ford</strong>!
+        </p>
+      </div>
+    </section>
+
+    <section class="section has-background-grey-lighter">
+      <div class="columns">
+        <div class="container notification has-background-grey-light">
+          <!-- columns: https://bulma.io/documentation/columns/basics/ -->
+          <div class="coilTable">
+
+          </div>
+
+          <div class="center">
+            <div class="column">
+              <button
+                class="button addBtn"
+                style="width: 255px;"
+                id="changeToMainpage_Btn"
+                onclick="onChangeToMainPageButtonClick()">
+                Zur Startseite wechseln
+              </button>
+              <button
+                class="button addBtn"
+                style="width: 255px;"
+                id="saveChanges_Btn"
+                onclick="onSaveChangesButtonClick()">
+                Änderungen speichern
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      var coils = {{ coils|safe }} ;// Laden aus der Python Datei
+      //var dummy = {{ dummy_coils|safe }} // Laden aus der Python Datei
+
+
+
+      // Änderung der Button - Beschriftung für show_path
+      document.getElementById("show_path").value = localStorage.getItem("buttonText");
+    </script>
+  </body>
+</html>
