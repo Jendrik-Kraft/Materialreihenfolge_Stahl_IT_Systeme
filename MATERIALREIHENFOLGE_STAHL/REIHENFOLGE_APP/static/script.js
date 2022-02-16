@@ -21,7 +21,7 @@ function updateToleranz() {
     localStorage.setItem("Dicke", tol_dicke.value);
     
     if (localStorage.getItem("buttonText") == "Zeige alle Pfade"){
-      location.href = "http://127.0.0.1:8000/display_graph/" + tolBreite + "/" + tolDicke + "/best_path";
+      location.href = "http://127.0.0.1:8000/display_graph/" + tol_breite.value + "/" + tol_dicke.value + "/best_path";
     }    
     else {    
       location.href = "http://127.0.0.1:8000/display_graph/" + tol_breite.value + "/" + tol_dicke.value;
