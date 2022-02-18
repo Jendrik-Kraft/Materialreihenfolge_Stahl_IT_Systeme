@@ -238,6 +238,10 @@ def get_dummy_coils(coil1, coil2, dummy_coils, count = None):
         else:  # coil1.Width.iloc[0] < coil2.Width.iloc[0]:
             dummy_coils_rslt = dummy_coils_rslt[dummy_coils_rslt['Width'] <= coil1.tolerance_w_top.iloc[0]]
 
+    # Check ob noch Dummy-Coils verfügbar
+    if dummy_coils_rslt.empty == True:
+        return -1
+
     # Sortieren: Dummy-Coils auswählen die am nächsten an Toleranzgrenze liegen
     if coil1.Hight.iloc[0] > coil2.Hight.iloc[0]:
         if coil1.Width.iloc[0] > coil2.Width.iloc[0]:
@@ -268,22 +272,22 @@ def get_dummy_coils(coil1, coil2, dummy_coils, count = None):
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Durchlauf mit alter Excel DB
-[coils, dummy_coils] = get_coils_from_database()
+#[coils, dummy_coils] = get_coils_from_database()
 tolerance_h_per = 10
-tolerance_w_abs = 10
-print('-----------------------------------------------------')
-print('Eingelesene Coils:')
-print(coils)
-print('-----------------------------------------------------')
-print('Eingelesene Dummy-Coils:')
-print(dummy_coils)
-print('-----------------------------------------------------')
-complete_coils = generate_path(coils, dummy_coils, tolerance_h_per, tolerance_w_abs)
-print('Erstellter Pfad:')
-print(complete_coils[complete_coils['dummy'] == False])
-print('-----------------------------------------------------')
-print('Gesamt-Coilliste für gewählten Pfad:')
-print(complete_coils)
+tolerance_w_abs = 6
+#print('-----------------------------------------------------')
+#print('Eingelesene Coils:')
+#print(coils)
+#print('-----------------------------------------------------')
+#print('Eingelesene Dummy-Coils:')
+#print(dummy_coils)
+#print('-----------------------------------------------------')
+#complete_coils = generate_path(coils, dummy_coils, tolerance_h_per, tolerance_w_abs)
+#print('Erstellter Pfad:')
+#print(complete_coils[complete_coils['dummy'] == False])
+#print('-----------------------------------------------------')
+#print('Gesamt-Coilliste für gewählten Pfad:')
+#print(complete_coils)
 
 # Durchlauf mit neuer DB
 [coilsnew, dummy_coilsnew] = get_coils_from_database_new()

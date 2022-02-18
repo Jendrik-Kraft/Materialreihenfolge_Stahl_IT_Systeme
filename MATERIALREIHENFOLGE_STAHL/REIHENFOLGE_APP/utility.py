@@ -241,6 +241,10 @@ def get_dummy_coils(coil1, coil2, dummy_coils, count = None):
         else:  # coil1.Width.iloc[0] < coil2.Width.iloc[0]:
             dummy_coils_rslt = dummy_coils_rslt[dummy_coils_rslt['Width'] <= coil1.tolerance_w_top.iloc[0]]
 
+    # Check ob noch Dummy-Coils verfügbar
+    if dummy_coils_rslt.empty == True:
+        return -1
+
     # Sortieren: Dummy-Coils auswählen die am nächsten an Toleranzgrenze liegen
     if coil1.Hight.iloc[0] > coil2.Hight.iloc[0]:
         if coil1.Width.iloc[0] > coil2.Width.iloc[0]:
