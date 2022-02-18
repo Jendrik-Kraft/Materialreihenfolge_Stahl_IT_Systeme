@@ -36,16 +36,12 @@ def mainpage(request, dicke=0, breite=0, pfade="all"):
 
 
 def editpage(request, breiteOrId=0, dicke=0):
+    if dicke != 0:
+        new_coil = (dicke, breiteOrId)
+        add_coils_to_database(new_coil)
+    else:
+        delete_coils_from_database(breiteOrId)
     [coils, dummy_coils] = get_coils_from_database()
     coils = round(coils, 2)
-    add_coils_to_database(add_coils_df=[breiteOrId, dicke])
-    delete_coils_from_database(breiteOrId)
-    # if table:
-    #     mylist = table.split(";")
-    #     editedCoilArray = []
-    #     for element in mylist:
-    #         editedCoilArray.append(element.split(","))
-    #     if len(editedCoilArray) > 0:
-    #         del editedCoilArray[0]
     coil_list_for_js = build_coil_list_for_js(coils)
     return render(request, 'REIHENFOLGE/editPage.html', {"coils": coils.values.tolist()})

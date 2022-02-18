@@ -60,11 +60,11 @@ def add_coils_to_database (add_coils_df):
     # Establish Database Connection in MS Access
     # CoilsDatabase includes default data and dummy coils
     try:
-        con_string = r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=.\CoilsDatabase.accdb;'
+        con_string = r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=REIHENFOLGE_APP\CoilsDatabase.accdb;'
         conn = pyodbc.connect(con_string)
         cursor = conn.cursor()
         # several new coils at a time
-        cursor.executemany('INSERT INTO Coils_default VALUES (?)', add_coils_df)
+        cursor.execute('INSERT INTO Coils_default(Hight, Width) VALUES (?,?)', add_coils_df)
         # only one new coil at a time?
         # cursor.execute('INSERT INTO Coils_default VALUES (?)', add_coils)
         conn.commit()
@@ -85,7 +85,7 @@ def delete_coils_from_database (id):
     :return: tbd
     """
     try:
-        con_string = r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=.\CoilsDatabase.accdb;'
+        con_string = r'DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=REIHENFOLGE_APP\CoilsDatabase.accdb;'
         conn = pyodbc.connect(con_string)
         cursor = conn.cursor()
         cursor.execute('DELETE FROM Coils_default WHERE RecordID = ?', (id))
