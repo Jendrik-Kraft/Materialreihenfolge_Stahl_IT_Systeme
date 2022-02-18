@@ -5,57 +5,79 @@ function onChangeToMainPageButtonClick() {
     "http://127.0.0.1:8000/display_graph/10/10";
 }
 
-function onSaveChangesButtonClick() {
-    //var coilsTableData = document.querySelector("tbody.coilsTable-Body");
-    //var tableId = document.getElementById('coilsTable').value;
-    //var tBody = tableId.getElementsByTagName('tbody')[0];
-    //var tableRow = [1,2,4,5];//tBody.getElementsByTagName('tr');
-    //coils_list = document.getElementById('coilsTable').values.tolist();
-    var coilDiv = document.querySelector(".coilsTable");
-    //var tableRow = tBody.getElementsByTagName('tr');
-    let test =coilDiv.innerHTML;
-    test = test.replace(/td/g, '');
-    test = test.replace(/class="coilsTableBodyRow"/g,'');
-    test = test.replace(/thead class="coilsTableHead" contenteditable="false"/g,'');
-    test = test.replace(/class="coilsTableHeaderRow"/g, '');
-    test = test.replace(/class="coilsTableBody"/g, '');
-    test = test.replace(/</g, '');
-    test = test.replace(/>/g, '');
-    test = test.replace(/tr/g, '');
-    test = test.replace(/thID/g, '');
-    test = test.replace(/ththWidth/g, '');
-    test = test.replace(/ththHeight/g, '');
-    test = test.replace(/theadtbody /g, '');
-    test = test.replace(/tbody /g, '');
-    test = test.replace(/th/g, '');
-    test = test.replace(/\s+/g, '');
-    test = test.replace(/\//g, ',');
-    test = test.replace(/,,/g, ';');
-    test = test.replace(/;;/g, '');
-    //test.append('"');
-    let tableTest = String(test);
-
-
-
-    //array1.forEach(element => console.print(element));
-    //console.log('1');
-    //coils_list.forEach(element => console.log(element));
-    //list_for_js = [];
-    //for coil in coils_list:
-        //list_for_js.append({"x": coil[1], "y": coil[2]});
-    //list_for_js = json.dumps(list_for_js);
-    //var tableJS = json.dumps(tableRow);
-    location.href = "http://127.0.0.1:8000/edit_database/test/" + tableTest;
+function onAddButtonClick(){
+          var new_dicke = document.getElementById("input_dicke").value;
+          var new_breite = document.getElementById("input_breite").value;
+          location.href = "http://127.0.0.1:8000/edit_database/test/" + new_breite + "/" + new_dicke;
+//          const coilsTable = document.querySelector('.coilsTable');
+//          let coilsTableBodyRow = document.createElement('tr');
+//          coilsTableBodyRow.className = 'coilsTableBodyRow';
+//          let coilID = document.createElement('td');
+//          coilID.innerText = coilsTable.rows.length;
+//          let coilWidth = document.createElement('td');
+//          coilWidth.innerText = new_breite;
+//          let coilHight = document.createElement('td');
+//          coilHight.innerText = new_dicke;
+//          coilsTableBodyRow.append(coilID, coilWidth, coilHight);
+//          coilsTable.append(coilsTableBodyRow);
 }
+
+function onDeleteButtonClick() {
+    var delete_id = document.getElementById("input_ID").value;
+    location.href = "http://127.0.0.1:8000/edit_database/test/" + delete_id;
+}
+
+//function onSaveChangesButtonClick() {
+//    //var coilsTableData = document.querySelector("tbody.coilsTable-Body");
+//    //var tableId = document.getElementById('coilsTable').value;
+//    //var tBody = tableId.getElementsByTagName('tbody')[0];
+//    //var tableRow = [1,2,4,5];//tBody.getElementsByTagName('tr');
+//    //coils_list = document.getElementById('coilsTable').values.tolist();
+//    var coilDiv = document.querySelector(".coilsTable");
+//    //var tableRow = tBody.getElementsByTagName('tr');
+//    let test =coilDiv.innerHTML;
+//    test = test.replace(/td/g, '');
+//    test = test.replace(/class="coilsTableBodyRow"/g,'');
+//    test = test.replace(/thead class="coilsTableHead" contenteditable="false"/g,'');
+//    test = test.replace(/class="coilsTableHeaderRow"/g, '');
+//    test = test.replace(/class="coilsTableBody"/g, '');
+//    test = test.replace(/</g, '');
+//    test = test.replace(/>/g, '');
+//    test = test.replace(/tr/g, '');
+//    test = test.replace(/thID/g, '');
+//    test = test.replace(/ththWidth/g, '');
+//    test = test.replace(/ththHeight/g, '');
+//    test = test.replace(/theadtbody /g, '');
+//    test = test.replace(/tbody /g, '');
+//    test = test.replace(/th/g, '');
+//    test = test.replace(/\s+/g, '');
+//    test = test.replace(/\//g, ',');
+//    test = test.replace(/,,/g, ';');
+//    test = test.replace(/;;/g, '');
+//    //test.append('"');
+//    let tableTest = String(test);
+//
+//
+//
+//    //array1.forEach(element => console.print(element));
+//    //console.log('1');
+//    //coils_list.forEach(element => console.log(element));
+//    //list_for_js = [];
+//    //for coil in coils_list:
+//        //list_for_js.append({"x": coil[1], "y": coil[2]});
+//    //list_for_js = json.dumps(list_for_js);
+//    //var tableJS = json.dumps(tableRow);
+//    location.href = "http://127.0.0.1:8000/edit_database/test/" + tableTest;
+//}
 
 function buildTable() {
       var coilDiv = document.querySelector("div.coilTable"); // Find the scoreboard div in our html
       //scoreDiv.style.background = "green";
-      var tableHeaders = ["ID","Width", "Height"];
+      var tableHeaders = ["ID","Breite", "Dicke"];
       const createCoilTable = () =>
       {
           while (coilDiv.firstChild){ coilDiv.removeChild(coilDiv.firstChild); }// Remove all children from scoreboard div (if any)
-          let coilsTable = document.createElement('table'); // Create the table itself
+          var coilsTable = document.createElement('table'); // Create the table itself
           coilsTable.className = 'coilsTable';
           let coilsTableHead = document.createElement('thead') ;// Creates the table header group element
           coilsTableHead.className = 'coilsTableHead';
@@ -92,11 +114,7 @@ function buildTable() {
       //var coils = {{ coils|safe }} ;
       //var coils=coils;
       createCoilTable();// Clears scoreboard div if it has any children nodes, creates & appends the table
-      coilDiv.setAttribute("contenteditable", true);
-      var coilsTableHead = document.querySelector("thead.coilsTableHead");
-      coilsTableHead.setAttribute("contenteditable", false);
       // Iterates through all the objects in the scores array and appends each one to the table body
-
       for (const coil of coils) {
           var coilIndex = coils.indexOf(coil) + 1;// Index of score in score array for global ranking (these are already sorted in the back-end)
           appendCoils(coil); // Creates and appends each row to the table body

@@ -21,5 +21,6 @@ urlpatterns = [
     path('display_graph/<int:breite>/<int:dicke>/<str:pfade>', views.mainpage, name="home-page"),
     path('display_graph/<int:breite>/<int:dicke>', views.mainpage, name="home-page"),
     path('edit_database/test', views.editpage, name="edit-page"),
-    path('edit_database/test/<str:table>', views.editpage, name="edit-page"),
+    path('edit_database/test/<int:breiteOrId>/<int:dicke>', views.editpage, name="edit-page"),
+    path('edit_database/test/<int:breiteOrId>', views.editpage, name="edit-page"),
 ]

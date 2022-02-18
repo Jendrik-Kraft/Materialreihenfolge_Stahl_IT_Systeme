@@ -64,7 +64,7 @@ def add_coils_to_database (add_coils_df):
         conn = pyodbc.connect(con_string)
         cursor = conn.cursor()
         # several new coils at a time
-        cursor.executemany('INSERT INTO Coils_default VALUES (?)', add_coils)
+        cursor.executemany('INSERT INTO Coils_default VALUES (?)', add_coils_df)
         # only one new coil at a time?
         # cursor.execute('INSERT INTO Coils_default VALUES (?)', add_coils)
         conn.commit()
