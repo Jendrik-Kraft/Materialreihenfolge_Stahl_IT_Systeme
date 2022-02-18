@@ -183,9 +183,8 @@ def get_complete_coil_list(coils, dummy_coils, tolerance_h_per, tolerance_w_abs)
             complete_coils = complete_coils.append(coils.iloc[n+1], ignore_index=True)
         # Nächstes Coil liegt nicht im Toleranzbereich: Dummycoil(s) notwendig
         else:
-            try:
-                dummy_coils_selection = get_dummy_coils(coils.iloc[[n]],coils.iloc[[n+1]], dummy_coils)
-            except RecursionError as re:
+            dummy_coils_selection = get_dummy_coils(coils.iloc[[n]],coils.iloc[[n+1]], dummy_coils)
+            if not isinstance(dummy_coils_selection, pd.DataFrame):
                 return -1
             complete_coils = complete_coils.append(dummy_coils_selection)
             complete_coils = complete_coils.append(coils.iloc[n+1], ignore_index=True)
@@ -194,7 +193,7 @@ def get_complete_coil_list(coils, dummy_coils, tolerance_h_per, tolerance_w_abs)
     complete_coils = complete_coils[['RecordID', 'Hight', 'Width', 'dummy']]
     return complete_coils
 
-def get_dummy_coils(coil1, coil2, dummy_coils):
+def get_dummy_coils(coil1, coil2, dummy_coils, count = None):
     """
     This function searches for needed dummy_coils to be able to fuse coil1 with coil2.
     :param coil1: Pandas dataframe of the first (start) coil
@@ -202,6 +201,13 @@ def get_dummy_coils(coil1, coil2, dummy_coils):
     :param dummy_coils: List of available dummy coils
     :return: List of needed dummy coil(s) to fuse coil 1 with coil 2
     """
+    # Fehlerbehandlung, Abbruch bei zu vielen dummy-coils
+    if count == None:
+        count = 0
+    else:
+        count = count +1
+        if count > 10:
+            return -1
 
     dummy_coils_rslt = dummy_coils
     # Check hight:
@@ -252,7 +258,11 @@ def get_dummy_coils(coil1, coil2, dummy_coils):
         return dummy_coils_rslt
     # Coil2 (End-Coil) noch immer nicht im Toleranzbereiche vom ausgewählten Dummy-Coil
     else:
-        dummy_coils_rslt = dummy_coils_rslt.append(get_dummy_coils(dummy_coils_rslt, coil2, dummy_coils), ignore_index=True)
+        next_dummy = get_dummy_coils(dummy_coils_rslt, coil2, dummy_coils, count)
+        if not isinstance(next_dummy, pd.DataFrame):
+            return -1
+        else:
+            dummy_coils_rslt = dummy_coils_rslt.append(next_dummy, ignore_index=True)
 
     return dummy_coils_rslt
 
