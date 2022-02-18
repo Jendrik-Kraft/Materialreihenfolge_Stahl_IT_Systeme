@@ -3,10 +3,9 @@ from django.shortcuts import render
 from .database import *
 from .utility import *
 
+
 # Create your views here.
 def mainpage(request, dicke=0, breite=0, pfade="all"):
-    print(dicke)
-    print(breite)
     dummy_coils_for_js = []
     [coils, dummy_coils] = get_coils_from_database()
     error = 0
@@ -27,7 +26,7 @@ def mainpage(request, dicke=0, breite=0, pfade="all"):
             #fitting_coils = find_fusible_coils(coils, breite, dicke)
             dummy_coils_for_js = build_dummy_coil_list_for_js(complete_coils)
             fitting_coils_for_js = build_path_for_js(complete_coils)
-    else:
+    elif pfade == "best_path":
         fitting_coils = find_fusible_coils(coils, 0, 0)
         fitting_coils_for_js = build_fitting_coils_list_for_js(coils, fitting_coils)
     coil_list_for_js = build_coil_list_for_js(coils)
