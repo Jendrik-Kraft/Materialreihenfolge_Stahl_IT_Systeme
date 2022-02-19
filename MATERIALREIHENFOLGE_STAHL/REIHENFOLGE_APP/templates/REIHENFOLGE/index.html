@@ -195,8 +195,9 @@
     </section>
 
     <script>
-      var xAchse_Name = "Dicke in mm";
-      var yAchse_Name = "Breite in mm";
+      var xAchse_Name = "Dicke";
+      var yAchse_Name = "Breite";
+      var AxisLabelModifier = " in mm";
       var coils = {{ coils|safe }} ;// Laden aus der Python Datei
       var dummy_coils = {{ dummy_coils|safe }} ;// Laden aus der Python Datei
       //var dummy_coils = [{x: 2, y: 600}]; // Test Values für die Dummy Coils
@@ -232,8 +233,8 @@
         connections_reverse = connections_reverse.replaceAll("a","y");
         connections = JSON.parse(connections_reverse);
 
-        xAchse_Name="Breite in mm";
-        yAchse_Name="Dicke in mm";
+        xAchse_Name="Breite";
+        yAchse_Name="Dicke";
       }
 
       if(error == 1){
@@ -275,8 +276,8 @@
               bodyFont: { size: 18, weight: 'bold' },
               callbacks: {
                 title: function(tooltipItem) {
-                    title = 'Dicke: ' + tooltipItem[0].parsed.x;
-                    title += '\r\nBreite: ' + tooltipItem[0].parsed.y;
+                    title = xAchse_Name + ': ' + tooltipItem[0].parsed.x;
+                    title += '\r\n' + yAchse_Name +': ' + tooltipItem[0].parsed.y;
                     return title;
                 },
                 label: function(context) {
@@ -309,7 +310,7 @@
                         size: 21
                     },
                 display: true,
-                text: xAchse_Name,
+                text: xAchse_Name + AxisLabelModifier,
               },
             },
             y: {
@@ -323,7 +324,7 @@
                         size: 21
                     },
                 display: true,
-                text: yAchse_Name,
+                text: yAchse_Name + AxisLabelModifier,
               },
             },
           },
