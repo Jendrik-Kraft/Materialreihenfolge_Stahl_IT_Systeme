@@ -271,10 +271,12 @@
             legend: false,
             tooltip: {
               titleFont: { size: 18 },
+              position: 'nearest',
               bodyFont: { size: 18, weight: 'bold' },
               callbacks: {
                 title: function(tooltipItem) {
                     title = 'Dicke: ' + tooltipItem[0].parsed.x;
+                    title += '\r\nBreite: ' + tooltipItem[0].parsed.y;
                     return title;
                 },
                 label: function(context) {
@@ -284,7 +286,8 @@
                         label += ': ';
                     }
                     label = 'Breite: ' + context.parsed.y;
-                    return label;
+                    console.log(context);
+                    return '';
                 },
               },
               displayColors: false,
