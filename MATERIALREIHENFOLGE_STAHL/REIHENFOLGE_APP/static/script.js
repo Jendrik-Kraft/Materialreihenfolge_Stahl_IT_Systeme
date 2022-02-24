@@ -8,7 +8,7 @@ if (!firstTime) {
   localStorage.setItem("Dicke", "1");
   localStorage.setItem("buttonText", "Zeige besten Pfad");
   localStorage.setItem("DummyText", "Zeige Dummycoils an");
-  localStorage.setItem("tauschen", 0);
+  localStorage.setItem("tauschen", 1);
 } else if (firstTime == 1) {
   var tol_breite = localStorage.getItem("Breite");
   var tol_dicke = localStorage.getItem("Dicke");
