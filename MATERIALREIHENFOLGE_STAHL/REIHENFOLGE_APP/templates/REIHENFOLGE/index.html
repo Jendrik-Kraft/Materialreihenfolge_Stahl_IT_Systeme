@@ -216,6 +216,7 @@
       //var dummy_coils = [{x: 2, y: 600}]; // Test Values für die Dummy Coils
       var connections = {{ connections|safe }} ;// Laden aus der Python Datei
       var error = {{ error|safe }} ; //Lade Error Status
+      var allCoils = coils.concat(dummy_coils);
 
       if(localStorage.getItem("DummyText")=="Zeige Dummycoils an" && localStorage.getItem("buttonText")=="Zeige besten Pfad"){
         dummy_coils=[];
@@ -227,6 +228,12 @@
         document.getElementById("show_dummys").setAttribute("disabled", "disabled");
       }
       if(localStorage.getItem("tauschen")==1){
+        var allCoils_string=JSON.stringify(allCoils);
+        var allCoils_reverse = allCoils_string.replaceAll("x","a");
+        allCoils_reverse = allCoils_reverse.replaceAll("y","x");
+        allCoils_reverse = allCoils_reverse.replaceAll("a","y");
+        allCoils = JSON.parse(allCoils_reverse);
+
         var coils_string=JSON.stringify(coils);
         var coils_reverse = coils_string.replaceAll("x","a");
         coils_reverse = coils_reverse.replaceAll("y","x");
@@ -260,6 +267,13 @@
       new Chart("myChart", {
         data: {
           datasets: [
+            {
+              type: "scatter",
+              pointRadius: 6,
+              borderColor: "rgba(0,0,0,0)",
+              pointBackgroundColor: "rgba(0,0,0,0)",
+              data: allCoils,
+            },
             {
               type: "scatter",
               pointRadius: 6,
@@ -300,7 +314,6 @@
                         label += ': ';
                     }
                     label = 'Breite: ' + context.parsed.y;
-                    console.log(context);
                     return '';
                 },
               },
